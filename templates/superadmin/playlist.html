@@ -1,0 +1,342 @@
+    {% extends 'superadmin/base.html' %} {% load static %} {% block body %}
+
+    <style type="text/css">
+        .cat_image {
+            width: 60px;
+            height: 50px;
+        }
+
+        .kt-aside .kt-aside-menu {
+            margin: 0;
+        }
+
+        .playlist-body img {
+            box-shadow: 0px 0px 13px 0px rgb(0 0 0 / 8%);
+            margin-bottom: 15px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        @media(max-width:1024px) {
+            .playlist-body img {
+                box-shadow: 0px 0px 13px 0px rgb(0 0 0 / 8%);
+                margin-bottom: 15px;
+                height: 250px;
+                object-fit: cover;
+            }
+        }
+
+        .profile-edit-btn {
+            position: absolute;
+            color: white;
+            letter-spacing: 3px;
+            font-size: 15px;
+            margin: 5px;
+            bottom: 50px;
+            transition: .5s;
+            display: none;
+        }
+
+        .img-body:hover .profile-edit-btn {
+            display: block;
+        }
+    </style>
+
+
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+
+
+    <!-- ERRORS START -->
+
+    <div class="alert alert">
+
+    </div>
+    <!-- ERRORS END -->
+
+    <!-- MSG START -->
+
+    <div class="alert alert">
+
+    </div>
+
+    <!-- MSG END -->
+
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                        Playlist
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                            <a data-toggle="modal" data-target="#exampleModalCenter" href="#"
+                                class="btn btn-brand btn-elevate btn-icon-sm">
+                                <i class="fa fa-plus"></i> Add New
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="kt-portlet__body playlist-body">
+
+                <div class="row">
+                    {% for data in data  %}
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-12 img-body">
+                        <div class="profile-edit-btn">
+                            <a name="edit" id="1" data-toggle="modal" data-target="#exampleModalCenter12" href="#"  onclick="editplaylist('{{data.Playlist_Id}}')"
+                                style="color:white;">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a onclick="deleteplaylist('{{data.Playlist_Id}}')"
+                                href="#" style="color:white;">
+                                <i class="fa fa-trash-alt"></i>
+                            </a>
+
+                        </div>
+                        <a href="/superadmin/AddPlaylist/{{data.Playlist_Id}}">
+
+
+                            <img width="100%" src="{{data.Image.url}}">
+                            <div class="text-center mt-2">
+                                <h4 class="text-dark">{{data.Title}}</h4>
+                            </div>
+                        </a>
+                    </div>
+
+                    {% endfor %}
+                </div>
+               
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!-- Sub Category End -->
+
+
+
+    <!-- end:: Content -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+    <!-- EDIT CATEGORY START -->
+
+    <!-- EDIT CATEGORY END -->
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add Playlist</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+
+                        <!--begin::Portlet-->
+                        <div class="kt-portlet">
+                            <!--begin::Form-->
+                            <form class="kt-form" action="/superadmin/playlist" method="post"
+                                enctype="multipart/form-data">
+
+                                {% csrf_token %}
+                                <div class="kt-portlet__body">
+                                    <div class="kt-section kt-section--first">
+                                        <div class="kt-section__body">
+
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">Title:</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="title" class="form-control"
+                                                        placeholder="Title" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">Description:</label>
+                                                <div class="col-lg-8">
+                                                    <textarea name='description' class="form-control"
+                                                        required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">Image:</label>
+                                                <div class="col-lg-8">
+                                                    <input required type="file" name="thumbnail" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--end::Form-->
+                        </div>
+
+                        <!--end::Portlet-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add Playlist</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="modal fade" id="exampleModalCenter12" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Playlist</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+
+                        <!--begin::Portlet-->
+                        <div class="kt-portlet">
+                            <!--begin::Form-->
+                            <form class="kt-form" action="/superadmin/editplaylist" method="post"
+                                enctype="multipart/form-data">
+                               
+
+                                {% csrf_token %}
+                                <div class="kt-portlet__body">
+                                    <div class="kt-section kt-section--first">
+                                        <div class="kt-section__body">
+
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">Title:</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="Title" id="Title" class="form-control"
+                                                        placeholder="Title">
+                                                        <input type="hidden" name="Playlist_Id" id="Playlist_Id">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">Description:</label>
+                                                <div class="col-lg-8">
+                                                    <textarea name='Decsription' id="Decsription" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label">Image:</label>
+                                                <div class="col-lg-8">
+                                                    <input type="file" name="Image" class="form-control"
+                                                        placeholder="Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--end::Form-->
+                        </div>
+
+                        <!--end::Portlet-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type='hidden' name='edit_id'>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+        //show category detail
+            function editplaylist(id) {
+                $.ajax({
+                    url: 'editplaylist',
+                    type: 'GET',
+                    data: {
+                        'id': id,
+
+                    },
+                    success: function (data) {
+
+                        var datas = eval(data);
+                        $('#Title').val(datas[0].Title);
+                        $('#Decsription').val(datas[0].Decsription);
+                        $('#Playlist_Id').val(id);
+
+
+
+                    }
+
+
+
+                });
+            }
+
+
+            //delete category
+            function deleteplaylist(id) {
+
+
+                        $.ajax({
+                            url: 'deleteplaylist',
+                            type: 'GET',
+                            data: {
+                                'id': id,
+
+                            },
+                            success: function (data) {
+
+
+
+                                window.location.href = "/superadmin/playlist"
+
+
+
+                            }
+
+
+
+                        });
+                    
+                    }
+
+                
+    </script>
+
+    {% endblock %}

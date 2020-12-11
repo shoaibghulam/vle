@@ -1,0 +1,577 @@
+{% extends 'superadmin/base.html' %} {% load static %} {% block body %}
+
+<!-- begin:: Content -->
+<style type="text/css">
+.custom_button_sm{
+    padding: 5px 6px 5px 10px !important;
+}
+    @media only screen and (max-width: 500px) {
+       .custom_button{
+        margin-right: -7%;
+       }
+    }
+</style>
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+    <!-- Search Filter -->
+   
+    <!-- Search Filter End -->
+
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+    </div>
+    {% endfor %}
+
+
+
+    <!-- Sub Category Table -->
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon">
+					<i class="kt-font-brand flaticon2-line-chart"></i>
+				</span>
+                <h3 class="kt-portlet__head-title">
+                    Students List
+                </h3>
+            </div>
+            <div class="kt-portlet__head-toolbar">
+                <div class="kt-portlet__head-wrapper">
+                    <div class="kt-portlet__head-actions">
+                        <a href="exportuserdata" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <i class="fa fa-file-excel"></i> Export as Excel
+                        </a>
+                        <a data-toggle="modal" data-target="#exampleModalCenter12" href="#" class="btn btn-brand btn-elevate btn-icon-sm custom_button">
+                            <i class="fa fa-plus"></i> Add New
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+
+            <!--begin: Datatable -->
+            <div class="table-responsive">
+                <table class="table table-striped- table-bordered table-hover table-checkable " id="kt_table">
+                    <thead>
+                        <tr>
+
+                            <th>Student Image</th>
+                            <th>Student Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Referred By</th>
+                            <th>Subscription</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Joining Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        {% for data in data %}
+                        <tr>
+
+                            <td>
+                                <div class="kt-user-card-v2__pic">
+                                    <img src="{{data.U_Image.url}}" width="100px" height="100px" alt="photo">
+                                </div>
+                            </td>
+                            <td>
+
+                                {{data.Username}}
+
+                            </td>
+
+                            <td>
+                                {{data.U_Fname}}
+                            </td>
+
+                            <td>
+                                {{data.U_Lname}}
+                            </td>
+
+
+                            <td>
+                                {{data.Refered_by_Trainer}}
+                            </td>
+
+
+                            <td>
+                                {{data.Subscription_Status}}
+                            </td>
+
+                            <td>
+                                {{data.U_Email}}
+                            </td>
+                            <td>
+                                {{data.U_ContactNo}}
+                            </td>
+                            <td>
+                                {{data.Joining_Date}}
+                            </td>
+                            <td>
+                                {{data.Status}}
+                            </td>
+                            <td style="padding: 3px">
+                                <a data-toggle="modal" onclick="editclick();studentshow({{data.User_Account_Id}})" data-target="#check12" href="#" class="btn-sm custom_button_sm btn-success">
+                                    <i class="fa fa-edit"></i>
+
+
+                                </a>
+
+
+
+                                <a href="#" class="btn-sm custom_button_sm  ml-3 btn-danger" onclick="studentDelete({{data.User_Account_Id}})">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!--end: Datatable -->
+        </div>
+    </div>
+    <!-- Sub Category End -->
+</div>
+<!-- Add User Modal -->
+<div class="modal fade" id="exampleModalCenter12" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Student</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">X</span>
+				</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12">
+
+                    <!--begin::Portlet-->
+                    <div class="kt-portlet">
+                        <!--begin::Form-->
+                        <form enctype="multipart/form-data" class="kt-form" method="POST" action="/superadmin/studentadd">
+                            {% csrf_token %}
+
+                            <div class="kt-portlet__body">
+                                <div class="kt-section kt-section--first">
+                                    <div class="kt-section__body">
+                                        <div class="form-group row">
+                                            <label class="col-xl-4 col-lg-4 col-form-label">Student Image</label>
+
+                                            <div class="col-lg-8 col-xl-8">
+
+                                                <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar_1">
+                                                    <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg); width:100px; "></div>
+                                                    <label class=" kt-avatar__upload " data-toggle="kt-tooltip " title=" " data-original-title="Upload Logo ">
+														<i class="fa fa-pen"></i>
+														<input type="file" name="image" class="form-control" accept="image/*" required>
+													</label>
+                                                    <span class="kt-avatar__cancel " data-toggle="kt-tooltip " title=" " data-original-title="Cancel avatar ">
+														<i class="fa fa-times "></i>
+													</span>
+                                                </div>
+                                                <span class="form-text text-muted ">Allowed file types: png, jpg, jpeg.</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">First Name:</label>
+                                            <div class="col-lg-8 ">
+                                                <input required type="text " class="form-control " placeholder="Enter First Name " name="fname">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Last Name:</label>
+                                            <div class="col-lg-8 ">
+                                                <input required type="text " class="form-control " placeholder="Enter Last Name " name="lname">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Student Name:</label>
+                                            <div class="col-lg-8 ">
+                                                <input required type="text " class="form-control " placeholder="Enter User Name " name="username">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Student Email:</label>
+                                            <div class="col-lg-8 ">
+                                                <input required type="email " class="form-control " placeholder="Enter User Email " name="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Student Contact:</label>
+                                            <div class="col-lg-8 ">
+                                                <input required type="text " class="form-control " placeholder="Enter User Contact " name="phone">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Gender:</label>
+                                            <div class="col-lg-8 ">
+                                                <select name="gender" class="form-control">
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                   
+                                                  </select>
+                                            </div>
+                                        </div>
+
+
+
+                                      <!--   <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Subscription:</label>
+                                            <div class="col-lg-8 ">
+                                                <select name="subscription" class="form-control">
+                                                    <option value="yearly">Yearly</option>
+                                                    <option value="monthly">Monthly</option>
+                                                    <option value="notsubscribe">Not Subscribe to Any Package</option>
+                                                   
+                                                  </select>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Set Password:</label>
+                                            <div class="col-lg-8 ">
+                                                <input name="password" type="text " class="form-control " placeholder="Set User Password " required minlength="8" maxlength="30">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Date of Birth :</label>
+                                            <div class="col-lg-8 ">
+                                                <input name="dbirth" required type="date" class="form-control ">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Description :</label>
+                                            <div class="col-lg-8 ">
+                                                <textarea required class="form-control " name="description" id="" cols="30" rows="10"></textarea>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Status:</label>
+                                            <div class="col-lg-8 ">
+                                                <select class="form-control " name="status">
+													<option value="active">Active</option>
+                                                    	<option value="inactive">In_Active</option>
+												</select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--end::Form-->
+                    </div>
+
+                    <!--end::Portlet-->
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button " class="btn btn-secondary " data-dismiss="modal ">Close</button>
+                <button type="submit" class="btn btn-primary ">Save Changes</button>
+            </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- EditModal -->
+<div class="modal fade " id="check12" tabindex="-1 " role="dialog " aria-labelledby="exampleModalCenterTitle " aria-hidden="true ">
+    <div class="modal-dialog modal-dialog-centered modal-lg " role="document ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <h5 class="modal-title " id="exampleModalLongTitle ">Edit Student</h5>
+                <button id="closebtn" onclick="btnclick();" type="button " class="close " data-dismiss="modal " aria-label="Close ">
+					<span aria-hidden="true ">X</span>
+				</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="col-lg-12">
+
+                    <!--begin::Portlet-->
+                    <div class="kt-portlet">
+                        <!--begin::Form-->
+                        <form enctype="multipart/form-data" class="kt-form" method="POST" action="/superadmin/showStudentDetail">
+                            {% csrf_token %}
+
+                            <div class="kt-portlet__body">
+                                <div class="kt-section kt-section--first">
+                                    <div class="kt-section__body">
+                                        <div class="form-group row">
+                                            <label class="col-xl-4 col-lg-4 col-form-label">Student Image</label>
+
+                                            <div class="col-lg-8 col-xl-8">
+
+                                                <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar_1">
+                                                    <div id="changeImage" class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg)"></div>
+
+
+                                                    <label class=" kt-avatar__upload " data-toggle="kt-tooltip " title=" " data-original-title="Upload Logo ">
+														<i class="fa fa-pen "></i>
+
+
+														<input type="file" name="image" id="img"class="form-control" accept="image/*">
+
+
+													</label>
+                                                    <span class="kt-avatar__cancel " data-toggle="kt-tooltip " title=" " data-original-title="Cancel avatar ">
+														<i class="fa fa-times "></i>
+													</span>
+                                                </div>
+                                                <span class="form-text text-muted ">Allowed file types: png, jpg, jpeg.</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">First Name:</label>
+                                            <div class="col-lg-8 ">
+                                                <input required type="text " class="form-control " placeholder="Enter First Name " name="fname" id="fname">
+
+
+                                                <input type="hidden" name="studentId" id="studentId">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Last Name:</label>
+                                            <div class="col-lg-8 ">
+                                                <input required type="text " class="form-control " placeholder="Enter Last Name " name="lname" id="lname">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Student Name:</label>
+                                            <div class="col-lg-8 ">
+                                                <input required type="text " class="form-control " placeholder="Enter User Name " name="username" id="username">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Student Email:</label>
+                                            <div class="col-lg-8 ">
+                                                <input required type="email " class="form-control " placeholder="Enter User Email " name="email" id="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Student Contact:</label>
+                                            <div class="col-lg-8 ">
+                                                <input id="phone" required type="text " class="form-control " placeholder="Enter User Contact " name="phone">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Gender:</label>
+                                            <div class="col-lg-8 ">
+                                                <select name="gender" class="form-control" id="gender">
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                   
+                                                  </select>
+                                            </div>
+                                        </div>
+
+
+
+                                      <!--   <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Subscription:</label>
+                                            <div class="col-lg-8 ">
+                                                <select id="subscription" name="subscription" class="form-control">
+                                                    <option value="yearly">Yearly</option>
+                                                    <option value="monthly">Monthly</option>
+                                                    <option value="notsubscribe">Not Subscribe to Any Package</option>
+                                                   
+                                                  </select>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Set Password:</label>
+                                            <div class="col-lg-8 ">
+                                                <input name="password" type="text " class="form-control " placeholder="Set User Password " id="password" required minlength="8" maxlength="30">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Date of Birth :</label>
+                                            <div class="col-lg-8 ">
+                                                <input id="dbirth" name="dbirth" required type="date" class="form-control ">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Description :</label>
+                                            <div class="col-lg-8 ">
+                                                <textarea required class="form-control " name="description" id="desc" cols="30" rows="10"></textarea>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row ">
+                                            <label class="col-lg-4 col-form-label ">Status:</label>
+                                            <div class="col-lg-8 ">
+                                                <select class="form-control " name="status" id="status">
+													<option value="active">Active</option>
+                                                    	<option value="inactive">In_Active</option>
+												</select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--end::Form-->
+                    </div>
+
+                    <!--end::Portlet-->
+                </div>
+            </div>
+
+
+
+            <div class="modal-footer ">
+                <button type="button " onclick="btnclick();" class="btn btn-secondary " data-dismiss="modal ">Close</button>
+                <button type="button " class="btn btn-primary ">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var modal = document.getElementById('check12');
+    var backdrop = document.getElementsByClassName('modal-backdrop')
+
+    function btnclick() {
+        console.log('functionworking', backdrop);
+        modal.style.display = 'none';
+        backdrop[0].style.display = 'none';
+
+    }
+
+    function editclick() {
+
+
+
+        modal.style.display = 'block';
+
+
+
+
+    }
+
+
+
+
+
+    //delete student
+
+    function studentDelete(id) {
+        if (window.confirm("Are You Sure to Delete Student")) {
+            $.ajax({
+                url: 'deleteStudent',
+                type: 'GET',
+                data: {
+                    'id': id,
+
+                },
+                success: function(data) {
+
+
+
+                    window.location.href = "/superadmin/"
+
+
+
+                }
+
+
+
+            });
+
+
+
+        }
+
+    }
+
+    //end student delete
+
+
+    //show student detail
+
+    function studentshow(id) {
+
+
+
+        $.ajax({
+            url: 'showStudentDetail',
+            type: 'GET',
+            data: {
+                'id': id,
+
+            },
+            success: function(data) {
+
+                var datas = eval(data);
+                $('#fname').val(datas[0].U_Fname);
+                $('#lname').val(datas[0].U_Lname);
+                $('#username').val(datas[0].Username);
+                $('#email').val(datas[0].U_Email);
+                $('#phone').val(datas[0].U_ContactNo);
+                $('#gender').val(datas[0].Gender);
+                $('#subscription').val(datas[0].Subscription_Status);
+                $('#password').val(datas[0].SPassword);
+                $('#dbirth').val(datas[0].DOB);
+                $('#desc').val(datas[0].U_Desc);
+                $('#status').val(datas[0].Status);
+                $('#studentId').val(id);
+                $('.kt-avatar__holder').css('background-image', 'url(' + datas[0].U_Image+ ')','width','100px');
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+        });
+
+    }
+</script>
+<!-- end:: Content -->
+{% endblock %}

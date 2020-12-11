@@ -1,0 +1,232 @@
+{% load static %}
+<style type="text/css">
+   .navbar .container {
+    background: #f4f4f4 !important;
+    position: relative;
+}
+.navbar-default {
+    background: #f4f4f4 !important;
+    border: 0px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+}
+.navbar-brand img {
+    height: 134%;
+    width: 21%;
+    padding: 0px;
+    margin-left: -14%;
+    margin-top: -3%;
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+<div id="overlay">
+   <div class="spinner"></div>
+</div>
+<header id="sticky-header">
+   <div class="navbar navbar-default" role="navigation">
+      <div class="container">
+         <div class="logo mt-md-2 mt-1">
+            <a class="navbar-brand white-logo" href="/clientside/favorities">
+               <img src="\static\clientside\images\logo2.png">
+            </a>
+            <a class="navbar-brand black-logo" href="/clientside/favorities">
+               <img src="\static\clientside\images\logo2.png">
+            </a>
+            <div class="navbar-search-mob">
+               <a class="mk-search-trigger mk-fullscreen-trigger" id="search-button" href="#"><span class="pe-7s-search"></span></a>
+            </div>
+            <div class="mobile-menu"></div>
+         </div>
+         <div class="menu-area">
+            <div class="menu-container">
+               <nav class="menu">
+                  <ul>
+                     <li class="active">
+                        <a href=" /clientside/filterseries">Courses <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                        <ul>
+                           <li class="col-sm-2">
+                              <a href="class-finder.php"><b>Difiiculty</b></a>
+                              <ul>
+                                 {% for data in category %}
+                                 <li><a href="/clientside/relatedCategory/{{data.Category_Id}}">{{data.C_Name}}</a></li>
+                                 {% endfor %}
+                              </ul>
+                           </li>
+                           <div class="menu-heading">
+                              <p>New Release</p>
+                              <a href="/clientside/filterseries" class="ml-auto">View All</a>
+                           </div>
+                           {% for data in course|slice:"0:2" %}
+                           <li class="col-sm-5 pl-0">
+                              <div class="single-member">
+                                 <div class="featured-video position-relative">
+                                    <a href="/clientside/showcourse/{{data.Course_Id}}" class="p-0">
+                                    <img class="img-responsive" src="{{data.Series_Image.url}}" alt="">
+                                    </a>
+                                    <a href="#" class=" featured-video-play"><i class="fa fa-play"></i></a>
+                                 </div>
+                                 <h5>{{data.Series_Name}}</h5>
+                                 <p>Trainer : {{data.Trainer_Id.Username}}</p>
+                              </div>
+                              <!-- <img class="img-responsive megamenu-featured-image" src="images/portfolio/port19.jpg" alt="Mega Image"> -->
+                           </li>
+                           {% endfor %}
+                        </ul>
+                     </li>
+                     <li >
+                        <a href="/clientside/teacher">Teachers <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                        <ul class="t-list" >
+                           <div class="menu-heading">
+                              <p>New Release</p>
+                              <a href="/clientside/teacher" class="ml-auto">View All</a>
+                           </div>
+                           {% for t in Teacher %}
+                           <li >
+                              <div class="single-member">
+                                 <div class="featured-video position-relative">
+                                    <a href="/clientside/showteacherprofile/{{t.Trainer_Account_Id}}" class="p-0">
+                                    <img class="img-responsive rounded-img" src="{{t.U_Image.url}}" alt="">
+                                    </a>
+                                 </div>
+                                 <h5>{{t.Username}}</h5>
+                              </div>
+                           </li>
+                           {% endfor %}
+                        </ul>
+                     </li>
+                     
+                     <!-- <li>
+                        <a href="/clientside/classfinder">Classes <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                        
+                        
+                        
+                        
+                        <ul>
+                        
+                            <li class="col-sm-2"><a href="#"><b>Difficulty</b></a>
+                                <ul>
+                                    <li><a href="filter-series.php">Beginner</a></li>
+                                    <li><a href="filter-series.php">Moderate</a></li>
+                                    <li><a href="filter-series.php">Intermediate</a></li>
+                                    <li><a href="filter-series.php">Advance</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-2"><a href="#"><b>Courses</b></a> {% for data in course %}
+                                <ul>
+                                    <li><a href="filter-series.php">{{data.Series_Name}}</a></li>
+                        
+                                </ul>
+                                {% endfor%}
+                            </li>
+                        
+                            <div class="menu-heading">
+                                <p>Classess</p>
+                                <a href="filter-series.php" class="ml-auto">View All</a>
+                            </div>
+                        
+                        
+                        </ul>
+                        </li> --> <li class="user">
+                        <a href="/clientside/singlevideo">Subject Videos <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                        <ul style="width:100%;">
+                            {% for s in singlevideo|slice:"0:4" %}
+                           <li class="col-md-3">
+                              <div class="single-member">
+                                
+                                 <div class="featured-video position-relative">
+                                    <a href="/clientside/showsinglevideo/{{s.Single_Video_id}}" class="p-0">
+                                       <div class="portfolio-content">
+                                          <img class="img-responsive" src="{{s.Thumbnail.url}}" alt="">
+                                          <span class="featured-video-play"><i class="fa fa-play"></i></span>
+                                       </div>
+                                    </a>
+                                 </div>
+                                 <h5>{{s.Trainer_Id.Username}}</h5>
+                                 <p>{{s.Title_Name}}</p>
+                              </div>
+                              
+                           </li>
+                           {% endfor %}
+
+                        </ul>
+
+                     </li>
+                    
+                      
+                   
+                     <!-- <li >
+                        <a href="/clientside/teacher">Teachers <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                        <ul class="t-list" style="display: none;">
+                           <div class="menu-heading">
+                              <p>New Release</p>
+                              <a href="/clientside/teacher" class="ml-auto">View All</a>
+                           </div>
+                           {% for t in Teacher %}
+                           <li >
+                              <div class="single-member">
+                                 <div class="featured-video position-relative">
+                                    <a href="/clientside/showteacherprofile/{{t.Trainer_Account_Id}}" class="p-0">
+                                    <img class="img-responsive rounded-img" src="{{t.U_Image.url}}" alt="">
+                                    </a>
+                                 </div>
+                                 <h5>{{t.Username}}</h5>
+                              </div>
+                           </li>
+                           {% endfor %}
+                        </ul>
+                     </li>
+                     <li><a href="/clientside/myfavorite">My Favorities</a></li>
+                     <li class="user" style="display: none;">
+                        <a href="#">
+                           <svg viewBox="0 0 37 41" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px" cursor="pointer">
+                              <g stroke-width="3" fill="none" fill-rule="evenodd">
+                                 <path d="M18.521 22.03h.246c2.244-.038 4.06-.828 5.402-2.336 2.948-3.326 2.458-9.026 2.404-9.57-.19-4.084-2.122-6.038-3.716-6.95-1.188-.682-2.574-1.05-4.122-1.08h-.13c-.85 0-2.52.138-4.122 1.05-1.61.91-3.57 2.864-3.762 6.98-.054.544-.544 6.244 2.406 9.57 1.332 1.508 3.148 2.298 5.394 2.336zM10.85 23.203s-1.794 1.06-5.034 1.862c-3.878.958-3.63 4.948-3.63 6.198s-.024 2.658.4 3.686c.08.2 6.42 4.144 16.062 4.144 9.64 0 15.98-3.944 16.06-4.144.424-1.028.4-2.436.4-3.686s.248-5.24-3.63-6.198c-3.24-.802-5.034-1.862-5.034-1.862"></path>
+                              </g>
+                           </svg>
+                        </a>
+                        <ul class="User-Dropdown">
+                           <li><a>{{ request.session.userName }}</a></li>
+                           <hr>
+                           <li><a href="/clientside/user">My Profile</a></li>
+                           <li><a href="/clientside/contact">Contact Us</a></li>
+                           <hr>
+                           <li><a href="/clientside/logout">Logout</a></li>
+                        </ul>
+                     </li> -->
+                    <li><a href="/clientside/myfavorite">My Favorities</a></li>
+                     <li class="user" >
+                        <a href="#">
+                           <svg viewBox="0 0 37 41" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px" cursor="pointer">
+                              <g stroke-width="3" fill="none" fill-rule="evenodd">
+                                 <path d="M18.521 22.03h.246c2.244-.038 4.06-.828 5.402-2.336 2.948-3.326 2.458-9.026 2.404-9.57-.19-4.084-2.122-6.038-3.716-6.95-1.188-.682-2.574-1.05-4.122-1.08h-.13c-.85 0-2.52.138-4.122 1.05-1.61.91-3.57 2.864-3.762 6.98-.054.544-.544 6.244 2.406 9.57 1.332 1.508 3.148 2.298 5.394 2.336zM10.85 23.203s-1.794 1.06-5.034 1.862c-3.878.958-3.63 4.948-3.63 6.198s-.024 2.658.4 3.686c.08.2 6.42 4.144 16.062 4.144 9.64 0 15.98-3.944 16.06-4.144.424-1.028.4-2.436.4-3.686s.248-5.24-3.63-6.198c-3.24-.802-5.034-1.862-5.034-1.862"></path>
+                              </g>
+                           </svg>
+                        </a>
+                        <ul class="User-Dropdown">
+                           <li><a>{{ request.session.userName }}</a></li>
+                           <hr>
+                           <li><a href="/clientside/user">My Profile</a></li>
+                           <!-- <li><a href="/clientside/contact">Contact Us</a></li> -->
+                           <hr>
+                           <li><a href="/clientside/logout">Logout</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+               </nav>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- /.Navigation -->
+   <!-- Search Bar -->
+   <div class="mk-fullscreen-search-overlay" id="mk-search-overlay">
+      <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="pe-7s-close"></i></a>
+      <div id="mk-fullscreen-search-wrapper">
+         <form method="get" id="mk-fullscreen-searchform" action="#">
+            <input type="text" value="" placeholder="Search" id="mk-fullscreen-search-input" required>
+            <i class="pe-7s-search fullscreen-search-icon"><input value="" type="submit"></i>
+         </form>
+      </div>
+   </div>
+</header>

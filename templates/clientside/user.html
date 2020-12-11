@@ -1,0 +1,144 @@
+{% extends "clientside/base.html" %} {% load static %} {% block body %}
+<style>
+.custom-position{
+    position: relative;
+    left:30px;
+}
+</style>
+
+<body>
+    <!-- Header Area -->
+    <!-- Preloader -->
+
+
+    <!-- /Preloader -->
+    <!-- /Header Area -->
+    <div class="home-static" style="background:url(/static/assets/user.jfif) no-repeat;">
+        <div class="header-inner">
+            <div class="icon-photo-edit cover-pic">
+                <svg class="codicon m-0 codicon-camera-icon" viewBox="0 0 53 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+                <title>Group 16 Copy 3</title>
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="camera" fill="#000000" fill-rule="nonzero">
+                        <g id="Group-16-Copy-3" transform="translate(0.000000, -0.368914)">
+                            <path d="M3.88020294,9.65329418 L3.88020294,38.3299259 L49.8951505,38.3299259 L49.8951505,9.65329418 L37.667359,9.65329418 L31.6713345,3.65329418 L22.1566163,3.65329418 L16.1526408,9.65329418 L3.88020294,9.65329418 Z M0.880202939,6.65329418 L14.9105821,6.65329418 L20.9145576,0.653294181 L32.9145576,0.653294181 L38.9105821,6.65329418 L52.8951505,6.65329418 L52.8951505,41.3299259 L0.880202939,41.3299259 L0.880202939,6.65329418 Z"
+                                  id="Rectangle-8"></path>
+                            <path d="M26.8876767,30.6240078 C30.5506488,30.6240078 33.5200744,27.6545822 33.5200744,23.99161 C33.5200744,20.3286379 30.5506488,17.3592123 26.8876767,17.3592123 C23.2247046,17.3592123 20.255279,20.3286379 20.255279,23.99161 C20.255279,27.6545822 23.2247046,30.6240078 26.8876767,30.6240078 Z M26.8876767,33.6240078 C21.5678504,33.6240078 17.255279,29.3114364 17.255279,23.99161 C17.255279,18.6717837 21.5678504,14.3592123 26.8876767,14.3592123 C32.2075031,14.3592123 36.5200744,18.6717837 36.5200744,23.99161 C36.5200744,29.3114364 32.2075031,33.6240078 26.8876767,33.6240078 Z"
+                                  id="Oval-8"></path>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+                <input type="file" name="myfile[]" onchange="showThumbnail(this)" />
+            </div>
+        </div>
+    </div>
+    <div class="page-wrapper">
+        <div class="container">
+            <div class="user-info">
+                <div class="profile-header">
+                    <div class="profile-table">
+                        <div class="profile-table-left">
+                            <div class="profile-photo editable-user-photo ng-isolate-scope">
+                                <div class="dt-sc-team-thumb1">
+
+
+
+                                    <img title="" alt="" src="{{data.U_Image.url}}" "> 
+                                </div>
+                                <!-- ngIf: photoType != 'cover' -->
+                                <!-- end ngIf: photoType != 'cover' -->
+                                <div class="icon-photo-edit profile-pic ">
+                                    <!--?xml version="1.0 " encoding="UTF-8 "?-->
+                                    <svg class="codicon m-0 codicon-camera-icon " viewBox="0 0 53 41 " version="1.1 " xmlns="http://www.w3.org/2000/svg " xmlns:xlink="http://www.w3.org/1999/xlink ">
+                                    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+                                    <title>Group 16 Copy 3</title>
+                                    <desc>Created with Sketch.</desc>
+                                    <defs></defs>
+                                    <g id="Symbols " stroke="none " stroke-width="1 " fill="none " fill-rule="evenodd ">
+                                        <g id="camera " fill="#000000 " fill-rule="nonzero ">
+                                            <g id="Group-16-Copy-3 " transform="translate(0.000000, -0.368914) ">
+                                                <path d="M3.88020294,9.65329418 L3.88020294,38.3299259 L49.8951505,38.3299259 L49.8951505,9.65329418 L37.667359,9.65329418 L31.6713345,3.65329418 L22.1566163,3.65329418 L16.1526408,9.65329418 L3.88020294,9.65329418
+                                        Z M0.880202939,6.65329418 L14.9105821,6.65329418 L20.9145576,0.653294181 L32.9145576,0.653294181 L38.9105821,6.65329418 L52.8951505,6.65329418 L52.8951505,41.3299259 L0.880202939,41.3299259 L0.880202939,6.65329418 Z "
+                                                      id="Rectangle-8 "></path>
+                                                <path d="M26.8876767,30.6240078 C30.5506488,30.6240078 33.5200744,27.6545822 33.5200744,23.99161 C33.5200744,20.3286379 30.5506488,17.3592123 26.8876767,17.3592123 C23.2247046,17.3592123 20.255279,20.3286379
+                                        20.255279,23.99161 C20.255279,27.6545822 23.2247046,30.6240078 26.8876767,30.6240078 Z M26.8876767,33.6240078 C21.5678504,33.6240078 17.255279,29.3114364 17.255279,23.99161 C17.255279,18.6717837 21.5678504,14.3592123
+                                        26.8876767,14.3592123 C32.2075031,14.3592123 36.5200744,18.6717837 36.5200744,23.99161 C36.5200744,29.3114364 32.2075031,33.6240078 26.8876767,33.6240078 Z "
+                                                      id="Oval-8 "></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                    <!-- <input type="file " name="myfile[] " onchange="showThumbnail(this) " /> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-table-right ">
+                            <div class="profile-counters-actions-flex no-location-website ">
+                                
+                                    <div class="profile-actions profile-actions-current-user ">
+                                        <div class="edit-profile "><a class="btn alo-button fs-2 " href="/clientside/setting ">Edit
+                                        Profile</a>
+                                        </div>
+                                    </div>
+                                 
+
+
+                                </div>
+                                <div class="user-name-bio-container " style="position:relative; left:30px">
+
+ 
+
+
+                                    <h4 class="text-centre mt-5 ">
+                                        <div class="row ">
+                                            <div class="col-md-3 ">
+                                                Name:
+                                            </div>
+                                            <div class="col-md-4 custom-position">
+                                                {{data.U_Fname}} {{data.U_Lname}}
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3 ">
+                                            <div class="col-md-3 ">
+                                                Email:
+                                            </div>
+                                            <div class="col-md-4 custom-position">
+                                                {{data.U_Email}} </div>
+                                        </div>
+                                        <div class="row mt-3 ">
+                                            <div class="col-md-3 ">
+                                                Contact:
+                                            </div>
+                                            <div class="col-md-4 custom-position">
+                                                {{data.U_ContactNo}}
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3 ">
+                                            <div class="col-md-3 ">
+                                                Subscription:
+                                            </div>
+                                            <div class="col-md-6 custom-position">
+                                                {{data.Package_Id.Package_subscription}}
+                                            </div>
+                                        </div>
+                                       
+                                    </h4>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Area -->
+
+            <!-- /Footer Area -->
+        </div>
+        <!-- /Page Wrapper -->
+
+
+        {% endblock body %}

@@ -1,0 +1,167 @@
+{% extends "clientside/base.html" %} {% load static %} {% block body %}
+
+
+<body>
+    <!-- Header Area -->
+    <!-- Preloader -->
+
+
+    <!-- /Preloader -->
+    <section class="custom-header fill dark-overlay" style="background:url(/static/clientside/images/banner/15.jpg) no-repeat fixed;">
+        <div class="header-inner">
+            <div class="header-table">
+                <h2 style="font-size:5em;">My Favourites</h2>
+                <p><a class="brdcrm-home" href="/clientside/favorities">Home</a> &mdash; Favourites</p>
+            </div>
+        </div>
+    </section>
+    <!-- /Custom Page Header -->
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Favourites-->
+            <section class="home-area section-padding">
+                <!-- <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" placeholder="Search Here">
+                    </div>
+                </div> -->
+                <div class="section-title mt-5">
+                    <h4>RECENTLY ADDED COURSES</h4>
+                </div>
+
+            <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+                <div class="home-items owl-carousel">
+                    {% for r in recentcourse|slice:"0:6" %}
+
+                    <div class="single-insta">
+                        <div class="featured-video position-relative">
+                            <a href="/clientside/showcoursevideo/{{r.Course_Id}}">
+                                <img class="img-responsive" src="{{r.Series_Image.url}}" alt="">
+                            </a>
+                            <span class="featured-video-play-add">
+                                    <i class="fa fa-plus-circle fa_add" onclick="addfavorite('{{r.Course_Id}}')"></i>
+                                </span>
+                        </div>
+                        <div class="text-dark">
+                            <p class="fs-1">{{r.Series_Name}}</p>
+                            <p class="fs-2">{{r.Trainer_Id.U_Fname}} {{r.Trainer_Id.U_Lname}}</p>
+                            <p class="fs-3">{{r.Category_Id}}</p>
+                        </div>
+                    </div>
+
+
+
+                    {% endfor %}
+                </div>
+            </marquee>
+            </section>
+            <hr>
+
+            <hr>
+            <section class="home-area section-padding">
+                <div class="section-title mt-5">
+                    <h4>RECENTLY ADDED VIDEOS</h4>
+                </div>
+            <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+                <div class="home-items owl-carousel">
+                    {% for r in recentvideo|slice:"0:6" %}
+
+                    <div class="single-insta">
+                        <div class="featured-video position-relative">
+                            <a href="showsinglevideo/{{r.Single_Video_id}}">
+                                <img class="img-responsive" src="{{r.Thumbnail.url}}" alt="">
+                            </a>
+                            <span class="featured-video-play-add">
+                                <i class="fa fa-plus-circle fa_add" onclick="addfavoriteteacher('{{r.Single_Video_id}}')">
+
+                                </i></span>
+                        </div>
+                        <div class="text-dark">
+                            <p class="fs-1">{{r.Title_Name}}</p>
+                            <p class="fs-2">{{r.Trainer_Id.U_Fname}} {{r.Trainer_Id.U_Lname}}</p>
+                            <p class="fs-3">{{r.Category_Id}}</p>
+                        </div>
+                    </div>
+
+
+
+                    {% endfor %}
+                </div>
+            </marquee>
+            </section>
+
+        </div>
+    </div>
+    <!-- Footer Area -->
+
+    <!-- /Footer Area -->
+
+    </div>
+    <!-- /Page Wrapper -->
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
+        function addfavorite(id) {
+
+            if (window.confirm("Are You Sure to Add Course to favorities")) {
+                $.ajax({
+                    url: 'addtofavorite',
+                    type: 'GET',
+                    data: {
+                        'id': id,
+
+                    },
+                    success: function(data) {
+
+
+
+                        alert(data)
+
+
+
+                    }
+
+
+
+                });
+
+            }
+
+
+
+        }
+
+        function addfavoriteteacher(id) {
+
+            if (window.confirm("Are You Sure to Add Video to favorities")) {
+                $.ajax({
+                    url: 'addtofavoritevideo',
+                    type: 'GET',
+                    data: {
+                        'id': id,
+
+                    },
+                    success: function(data) {
+
+
+
+                        alert(data)
+
+
+
+                    }
+
+
+
+                });
+
+            }
+
+
+
+        }
+    </script>
+    {% endblock body %}

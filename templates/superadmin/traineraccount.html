@@ -1,0 +1,503 @@
+{% extends 'superadmin/base.html' %} {% load static %} {% block body %}
+<!-- begin:: Content -->
+<style type="text/css">
+    .custom_button_sm{
+    padding: 5px 6px 5px 10px !important;
+}
+
+</style>
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+    <!-- Search Filter -->
+
+    <!-- Search Filter End -->
+
+    <!-- Sub Category Table -->
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon">
+					<i class="kt-font-brand flaticon2-line-chart"></i>
+				</span>
+                <h3 class="kt-portlet__head-title">
+                    Teacher List
+                </h3>
+            </div>
+            <div class="kt-portlet__head-toolbar">
+                <div class="kt-portlet__head-wrapper">
+                    <div class="kt-portlet__head-actions">
+                        <a href="exporttrainerdata" class="btn btn-brand btn-elevate btn-icon-sm">
+                            <i class="fa fa-file-excel"></i> Export as Excel
+                        </a>
+                        <a data-toggle="modal" data-target="#exampleModalCenter" href="#" class="btn btn-brand btn-elevate btn-icon-sm ">
+                            <i class="fa fa-plus"></i> Add New
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} mb-0 alert-dismissible fade show" role="alert">
+            <strong>Message:</strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+        </div>
+        {% endfor %}
+
+        <div class="kt-portlet__body">
+
+            <!--begin: Datatable -->
+            <div class="table-responsive">
+                <table class="table table-striped- table-bordered table-hover table-checkable " id="kt_table">
+                    <thead>
+                        <tr>
+
+                            <th>Teacher Image</th>
+                            <th> User Name</th>
+                            <th> First Name</th>
+                            <th>Last Name</th>
+                            <th> Email</th>
+                            <th> Contact</th>
+                            <th> Referral Link</th>
+                            <th> Refferal Code</th>
+                            <th>Joining Date</th>
+                            <th>Status</th>
+                            <th>Generate New Referral Link</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in data %}
+
+
+                        <tr>
+
+                            <td>
+                                <div class="kt-user-card-v2__pic">
+                                    <img src="{{data.U_Image.url}}" width="100px" height="100px" alt="photo">
+                                </div>
+                            </td>
+                            <td>
+                                {{data.Username}}
+                            </td>
+                            <td>
+                                {{data.U_Fname}}
+                            </td>
+                            <td>
+                                {{data.U_Lname}}
+                            </td>
+                            <td>
+                                {{data.U_Email}}
+                            </td>
+                            <td>
+                                {{data.U_ContactNo}}
+                            </td>
+                            <td >
+                                <!-- <input type="hidden" id="{{data.Trainer_Account_Id}}" value = "{{data.Trainer_Account_Id}}" > -->
+                                <a href="#" onclick="copyReferenceLink({{data.Trainer_Account_Id}})">Refferral Link</a>
+                            </td>
+                            <td>
+                                {{data.Referal_Code}}
+                            </td>
+                            <td>
+                                {{data.Joining_Date}}
+                            </td>
+                            <td>
+                                <div class="kt-widget__label">
+                                    <span class="btn btn-label-success w-100 btn-sm btn-bold btn-upper">
+                                    {{data.Status}}</span>
+                                </div>
+                            </td>
+                            <td >
+
+                                <button class="btn btn-sm  btn-info btn-icon btn-icon-md" onclick="generatecode('{{data.Trainer_Account_Id}}')">
+                                    <i class="fa fa-cogs"></i>
+                                </button>
+
+                                </form>
+                            </td>
+
+                            <td style="padding: 3px">
+                                <a data-toggle="modal" data-target="#exampleModalCenter12" href="#" class="btn-sm btn-success custom_button_sm" onclick="getId('{{data.Trainer_Account_Id}}')">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn-sm ml-3 custom_button_sm btn-danger" onclick="deleteCategory('{{data.Trainer_Account_Id}}')">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!--end: Datatable -->
+        </div>
+    </div>
+    <!-- Sub Category End -->
+</div>
+<!-- Add User Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Teacher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">X</span>
+				</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12">
+
+                    <!--begin::Portlet-->
+                    <div class="kt-portlet">
+                        <!--begin::Form-->
+                        <form class="kt-form" action="/superadmin/traineraccount" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="kt-portlet__body">
+                                <div class="kt-section kt-section--first">
+                                    <div class="kt-section__body">
+                                        <div class="form-group row">
+                                            <label class="col-xl-4 col-lg-4 col-form-label">Teacher Image</label>
+                                            <div class="col-lg-8 col-xl-8">
+                                                <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar_1">
+                                                    <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg)"></div>
+                                                    <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Upload Logo">
+														<i class="fa fa-pen"></i>
+														<input type="file" name="U_Image" accept=".png, .jpg, .jpeg" required>
+													</label>
+                                                    <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
+														<i class="fa fa-times"></i>
+													</span>
+                                                </div>
+                                                <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">User Name:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="Username" placeholder="Enter User Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">First Name:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="U_Fname" placeholder="Enter First Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Last Name:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="U_Lname" placeholder="Enter Last Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Teacher Description:</label>
+                                            <div class="col-lg-8">
+
+                                                <textarea class="form-control" rows="2" name="U_Desc" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Teacher Email:</label>
+                                            <div class="col-lg-8">
+                                                <input type="email" class="form-control" name="U_Email" placeholder="Enter User Email" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Teacher Contact:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="U_ContactNo" placeholder="Enter User Contact" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Gender:</label>
+                                            <div class="col-lg-8">
+                                                <select class="form-control" name="Gender">
+													<option value="Male">Male</option>
+													<option value="Female">Female</option>
+												</select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Teacher DOB:</label>
+                                            <div class="col-lg-8">
+                                                <input type="date" class="form-control" name="DOB" placeholder="Enter User Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Set Password:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="SPassword" placeholder="Set Password" required maxlength="30" minlength="8">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Status:</label>
+                                            <div class="col-lg-8">
+                                                <select class="form-control" name="Status">
+													<option value="active">Active</option>
+													<option value="inactive">In_Active</option>
+												</select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!--end::Form-->
+                    </div>
+
+                    <!--end::Portlet-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- EditModal -->
+<div class="modal fade" id="exampleModalCenter12" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Teacher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">X</span>
+				</button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12">
+
+                    <!--begin::Portlet-->
+                    <div class="kt-portlet">
+                        <!--begin::Form-->
+                        <form class="kt-form" action="/superadmin/showedittrainer" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="kt-portlet__body">
+                                <div class="kt-section kt-section--first">
+                                    <div class="kt-section__body">
+                                        <div class="form-group row">
+                                            <label class="col-xl-4 col-lg-4 col-form-label">Teacher Image</label>
+                                            <div class="col-lg-8 col-xl-8">
+                                                <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar_1">
+                                                    <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg)"></div>
+                                                    <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Upload Logo">
+														<i class="fa fa-pen"></i>
+                                                        <input type="file" name="U_Image" id="U_Image" accept=".png, .jpg, .jpeg" >
+                                                        
+													</label>
+                                                    <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
+														<i class="fa fa-times"></i>
+													</span>
+                                                </div>
+                                                <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">User Name:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="Username" id="Username" placeholder="Enter User Name">
+                                                <input type="hidden" name="Trainerid" id="Trainerid">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">First Name:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="U_Fname" id="U_Fname" placeholder="Enter First Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Last Name:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="U_Lname" id="U_Lname" placeholder="Enter Last Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Teacher Description:</label>
+                                            <div class="col-lg-8">
+
+                                                <textarea class="form-control" rows="2" name="U_Desc" id="U_Desc"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Teacher Email:</label>
+                                            <div class="col-lg-8">
+                                                <input type="email" class="form-control" name="U_Email" id="U_Email" placeholder="Enter User Email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Teacher Contact:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="U_ContactNo" id="U_ContactNo" placeholder="Enter User Contact">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Gender:</label>
+                                            <div class="col-lg-8">
+                                                <select class="form-control" name="Gender" id="gender">
+													<option value="Male">Male</option>
+													<option value="Female">Female</option>
+												</select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Teacher DOB:</label>
+                                            <div class="col-lg-8">
+                                                <input type="date" class="form-control" name="DOB" id="DOB" placeholder="Enter User Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Set Password:</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" name="SPassword" id="SPassword" placeholder="Set Password" maxlength="30" minlength="8">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Status:</label>
+                                            <div class="col-lg-8">
+                                                <select class="form-control" name="Status" id="Status">
+													<option value="active">Active</option>
+													<option value="inactive">In_Active</option>
+												</select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!--end::Form-->
+                    </div>
+
+                    <!--end::Portlet-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+
+    function getId(id) {
+        $.ajax({
+            url: 'showedittrainer',
+            type: 'GET',
+            data: {
+                'id': id,
+
+            },
+            success: function(data) {
+
+                var datas = eval(data);
+
+                $('#Username').val(datas[0].Username);
+                $('#U_Fname').val(datas[0].U_Fname);
+                $('#U_Lname').val(datas[0].U_Lname);
+                $('#U_Desc').val(datas[0].U_Desc);
+                $('#U_Email').val(datas[0].U_Email);
+                $('#U_ContactNo').val(datas[0].U_ContactNo);
+                $('#gender').val(datas[0].Gender);
+                $('#DOB').val(datas[0].DOB);
+                $('#SPassword').val(datas[0].SPassword);
+                $('#Status').val(datas[0].Status);
+                $('#Trainerid').val(id);
+                $('.kt-avatar__holder').css('background-image', 'url(' + datas[0].U_Image+ ')');
+
+
+
+
+
+
+            }
+
+
+
+        });
+    }
+
+    function deleteCategory(id) {
+        if (window.confirm("Are You Sure to Delete Trainer")) {
+            $.ajax({
+                url: 'deletetraineraccount',
+                type: 'GET',
+                data: {
+                    'id': id,
+
+                },
+                success: function(data) {
+
+
+
+                    window.location.href = "/superadmin/traineraccount"
+
+
+
+                }
+
+
+
+            });
+
+        }
+
+
+
+    }
+
+    function generatecode(id) {
+
+        if (window.confirm("Are You Sure to generate new code")) {
+            $.ajax({
+                url: 'generatecode',
+                type: 'GET',
+                data: {
+                    'id': id,
+
+                },
+                success: function(data) {
+
+
+
+
+                    window.location.href = "/superadmin/traineraccount"
+
+
+                }
+
+
+
+            });
+
+
+        }
+
+
+    }
+
+
+    //copy Refernce code
+
+    function copyReferenceLink(id) {
+
+        var link = "http://127.0.0.1:8000/clientside/Referencesignup/" + id;
+        alert("Copy the follow link to Reference " + link)
+
+
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "clientside/head.html" %}
+  
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+   
+    <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+
+    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+  </head>
+
+{% block navbar %} 
+{% if request.session.userid %}
+  {% include "clientside/nav.html" %}
+{% else %}
+{% include "clientside/nav-unpaid.html" %}
+{% endif %}
+
+
+{% endblock navbar %} 
+
+
+{% block body %} 
+{% endblock body %}
+
+
+{% block footer %}
+ {% include "clientside/footer.html" %}
+
+{% endblock footer %}
+
+{% block script %}
+{% include "clientside/script.html" %}
+
+{% endblock script %}

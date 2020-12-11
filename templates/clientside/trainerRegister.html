@@ -1,0 +1,109 @@
+{% extends "clientside/base.html" %} {% load static %} {% block body %}
+<style>
+    .display-2 {
+        text-transform: uppercase !important;
+        font-size: 4.5rem !important;
+    }
+    
+   .col-md-12.my-5.text-center {
+        margin-bottom: 5rem !important;
+    }
+    .custom_style{
+    
+    background: #c1c1c12e;
+    border: 1px solid black;
+    }
+       @media screen and (max-width:768px) {
+        body{
+            overflow-x: hidden;
+        }
+
+     .container {
+       width: unset;
+      }
+    .custom_style {
+     width: unset;
+    background: #c1c1c12e;
+    border: 1px solid black;
+}
+    .row {
+    margin-right: -100px;
+    margin-left: -100px;
+}
+}
+</style>
+
+<body>
+    <!-- Header Area -->
+    <!-- Preloader -->
+
+    <!-- /Preloader -->
+    <!-- /Header Area -->
+    <!-- Custom Page Header -->
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} mb-0 alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    <!-- /Custom Page Header -->
+
+    <div class="page-wrapper">
+
+        <section class="setting-area section-padding" style="padding:10rem;">
+            <div class="container">
+                <div class="row mai_top" style="margin-top: 3%">
+                    <div class="col-md-6 m-auto float-none custom_style">
+                        <div class="col-md-12 my-5 text-center">
+                            <span class="display-2 text-dark"><b>Become A Trainer</b></span>
+                        </div>
+                        <form class="kt-form" action="/clientside/becometrainer" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input placeholder="Username" id="username" name="Username" type="text" required>
+
+                            <input placeholder="First Name" id="f_name" name="U_Fname" type="text" required>
+
+                            <input placeholder="Last Name" id="l_name" name="U_Lname" type="text" required>
+
+                            <input placeholder="Email Address" id="email_link" name="U_Email" type="email" required>
+
+                            <input placeholder="Contact No" id="contact_no" name="U_ContactNo" type="text" required>
+                            <textarea rows="2" name="U_Desc" placeholder="Desciption" required></textarea>
+                            <input type="file" name="U_Image" style="padding: 1rem; padding-left: 0px;">
+
+                            <div class="selection-box"><select name="Gender">
+                                    <option value="female">male</option>
+                                    <option value="female">female</option>
+                                </select>
+                            </div>
+
+                            <input placeholder="Date Of Birth" name="DOB" type="date" style="margin-bottom: 9px !important;">
+
+                            <input placeholder="Password" name="SPassword" type="password" required>
+
+
+                            <label><input type="checkbox" name="termscheckbox" required=""
+                                    style="height: 18px;width: 22px;"> I agreed with terms and conditions and privcy
+                                policy.</label>
+                            <div class="text-center">
+                                <input type="hidden" value="" name="referred_by" placeholder="Referral ID">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn alo-button w-50 fs-2">SIGNUP</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer Area -->
+
+        <!-- /Footer Area -->
+    </div>
+    <!-- /Page Wrapper -->
+    {% endblock body %}
+
+    <!-- /Google map -->

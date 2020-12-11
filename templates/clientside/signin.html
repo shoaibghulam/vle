@@ -1,0 +1,90 @@
+{% extends "clientside/base.html" %} {% load static %} {% block body %}
+<style>
+   
+    .custom_style{
+    width: 30%;
+    background: #c1c1c12e;
+    border: 1px solid black;
+    }
+  
+.display-2 {
+    font-size: 40px;
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 5px;
+}
+.col-md-12.my-5.text-center {
+    margin-bottom: 5rem !important;
+}
+
+@media screen and (max-width:786px) {
+    body{
+        overflow-x: hidden;
+    }
+    .custom_style {
+     width: unset;
+    background: #c1c1c12e;
+    border: 1px solid black;
+}
+    .row {
+    margin-right: -100px;
+    margin-left: -100px;
+}
+}
+
+</style>
+
+<body>
+    <!-- Header Area -->
+    <!-- Preloader -->
+    <!-- /Preloader -->
+    <!-- /Header Area -->
+    <!-- Custom Page Header -->
+
+    <!-- /Custom Page Header -->
+
+    <div class="page-wrapper">
+
+        <section class="setting-area section-padding" style="padding:10rem;">
+            <div class="container">
+                <div class="row mt-4 custom_style_responsive" >
+                    <div class="col-md-6 m-auto float-none custom_style custom_style_div">
+                        <div class="col-md-12 my-5 text-center">
+                            <span class="display-2 text-dark"><b>SIGN IN</b></span>
+                            {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Message:</strong> {{message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <form action="signin" method="POST" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+                            <input type="email" name="email" placeholder="Email" required="">
+                            <input type="password" name="password" placeholder="Password" required="">
+                            <div class="text-center">
+                                <button type="submit" class="btn alo-button w-50 fs-2">SIGNIN</button>
+                                <div class="mt-3">
+                                    <a href="/clientside/forgetpassword" class="text-dark pb-2"><u>Forgot Password
+                                            ?</u></a>
+                                    <p>New to Virtual? <a href="/clientside/signup" class="text-dark pb-2"><u>Signup</u></a></p>
+                                </div>
+
+                            </div>
+                            <hr>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- Footer Area -->
+
+        <!-- /Footer Area -->
+    </div>
+    <!-- /Page Wrapper -->
+    {% endblock body %}

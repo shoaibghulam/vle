@@ -1,0 +1,129 @@
+{% load static %}
+<style>
+    .navClosed {
+        padding-left: 3.5rem !important;
+        padding-right: 3rem !important;
+    }
+    .navbar-brand img {
+    height: 100%;
+    width: auto;
+    padding: 50px;
+}
+    @media screen and (max-width: 786px) {
+        .mobileMargin {
+            margin-left: -56px
+        }
+    }
+    
+    .fa.fa-bars {
+        font-size: 26px;
+    }
+    
+    .menu>ul {
+        display: flex;
+        margin: 42px 0;
+        list-style: none;
+        padding: 0;
+        box-sizing: border-box;
+        text-align: left;
+        float: right;
+    }
+    
+    .menu>ul>li a {
+        padding-bottom: 30px;
+        font-size: 15px;
+        font-family: 'Kufam', cursive;
+        letter-spacing: 0.08em;
+        line-height: 105%;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+    
+    .menu>ul>li>ul {
+        display: none;
+        width: 75%;
+        background: #fff none repeat scroll 0 0;
+        padding: 15px 0;
+        top: 70px;
+        position: absolute;
+        left: 1148px !important;
+        z-index: 99;
+        right: -38px;
+        margin: 0;
+        list-style: none;
+        box-sizing: border-box;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+        margin: 0 1%;
+    }
+    
+    @media screen and (max-width:786px) {
+        .textHeader {
+            margin-top: -44rem;
+            position: absolute;
+            z-index: 1;
+            left: -8px;
+            color: white;
+        }
+    }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<div id="overlay">
+    <div class="spinner"></div>
+</div>
+<header id="sticky-header">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid px-3 navClosed">
+            <div class="logo mt-md-2 mt-1">
+                <a class="navbar-brand white-logo mobileMargin" href="/clientside/" style="height: 107px;">
+                <img src="/static/clientside/images/logo2.png" style="margin-top: -46px; width:200px; height:200px">
+                </a>
+                <a class="navbar-brand black-logo mobileMargin" href="/clientside/" style="height: 107px;">
+                <img src="/static/clientside/images/logo2.png" style="height: 20rem; margin-top: -42px;">
+                </a>
+                <div class="mobile-menu"></div>
+            </div>
+            <div class="menu-area">
+                <div class="menu-container">
+                    <nav class="menu">
+                        <ul id="navUnpaid">
+                            <li class="active">
+                                <a href="/clientside/about">About</a>
+                            </li>
+                            <li id="supportTab">
+                                <a href="javascript:;">Support <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul style="max-width: 198px;left: 79rem;">
+                                    <li id="becomeTrainer"><a href="/clientside/becometrainer">Become a Trainer</a></li>
+                                    <!-- <li id="contactUs"><a href="/clientside/contactus">Contact Us</a></li> -->
+                                </ul>
+                            </li>
+                            <li><a href="/clientside/signin">Sign in</a></li>
+                            <li><a href="/clientside/signup">Sign Up</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.Navigation -->
+    <!-- Search Bar -->
+    <div class="mk-fullscreen-search-overlay" id="mk-search-overlay">
+        <a href="#" class="mk-fullscreen-close" id="mk-fullscreen-close-button"><i class="pe-7s-close"></i></a>
+        <div id="mk-fullscreen-search-wrapper">
+            <form method="get" id="mk-fullscreen-searchform" action="#">
+                <input type="text" value="" placeholder="Search" id="mk-fullscreen-search-input" required>
+                <i class="pe-7s-search fullscreen-search-icon"><input value="" type="submit"></i>
+            </form>
+        </div>
+    </div>
+    <script>
+        if (window.innerWidth <= 786) {
+            var becomeTrainer = document.getElementById("becomeTrainer");
+            var contactUs = document.getElementById("contactUs");
+            var navUnpaid = document.getElementById("navUnpaid");
+            var supportTab = document.getElementById("supportTab");
+            supportTab.style.display = "none";
+            navUnpaid.appendChild(becomeTrainer);
+            navUnpaid.appendChild(contactUs);
+        }
+    </script>
+</header>

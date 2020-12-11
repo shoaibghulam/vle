@@ -1,0 +1,311 @@
+{% extends "clientside/base.html" %} {% load static %} {% block body %}
+
+
+<!-- Header Area -->
+<!-- Preloader -->
+<style>
+    .textHeaderInner {
+        margin-bottom: 7px;
+        color: rgb(255, 255, 255);
+        font-size: 57px;
+        font-family: Arquitecta, Helvetica, Arial, sans-serif;
+        font-family: 'Raleway', sans-serif;
+        letter-spacing: 0.08em;
+        line-height: 105%;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-family: 'Cabin', sans-serif !important;
+    }
+    
+    @media screen and (max-width:786px) {
+        .textHeaderInner {
+            font-size: 28px;
+        }
+    }
+    
+    .text-bot {
+        margin-bottom: 15px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
+        font-family: 'Oswald', sans-serif;
+        letter-spacing: normal;
+        line-height: 170%;
+        font-weight: 300;
+        text-transform: none;
+    }
+    
+    .btn-classic {
+        width: 15em !important;
+        color: #000000;
+        letter-spacing: 3px;
+        background-color: #fff;
+        border-color: #fff;
+        font-size: 22px;
+    }
+</style>
+
+<!-- /Preloader -->
+<!-- /Header Area -->
+<div class="single-slider video-overlay" style="background:#666;">
+    <div id="ytvideo" class="loaded">
+        <div id="ytplayer-container1594220656864" class="ytplayer-container background"> <iframe id="YTPlayer-ID-1594220656864" class="ytplayer-player" style="width:100%; height:100vh; left: 0px; top:0px;" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player"
+                width="100%" height="100%" src="https://www.youtube.com/embed/Bp4BG4Me7TU?iv_load_policy=3&amp;modestbranding=0&amp;autoplay=1&amp;controls=0&amp;showinfo=0&amp;wmode=transparent&amp;branding=0&amp;autohide=0&amp;rel=0&amp;mute=true&amp;origin=http%3A%2F%2Flocalhost&amp;enablejsapi=1&amp;widgetid=1"></iframe>
+        </div>
+        <div id="ytplayer-shield" class="ytplayer-shield"></div>
+    </div>
+    <!-- <div class="slider-box">
+            <div class="table-cell">
+                <div class="col-md-6 col-xs-12 col-sm-12 col-md-offset-3">
+                </div>
+            </div>
+        </div> -->
+</div>
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+    <div class="container">
+        <div class="container textHeader">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 text-center">
+                    <h1 class="textHeaderInner">EDUCATORS lEARNING PLATFORM</h1>
+                    <div class="col-md-12 mt-3 text-center  pt-average pb-average text-white">
+                        <h3 class="text-white text-bot">$11.99 PER MONTH or $115 PER YEAR</h3>
+                    </div>
+                    <div class="col-md-12 mt-3 text-center">
+                        <a href="subscriptions.php" class="btn btn-classic btn-lg">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Team Area -->
+        <section class="team-area section-padding">
+            <div class="section-title">
+                <h4>DIFFERENT COURSES PROGRAMS WE OFFER</h4>
+            </div>
+        <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+            <div class="home-items owl-carousel">
+                {% for r in recentcourse %}
+
+                <div class="single-insta">
+                    <div class="featured-video position-relative">
+                        <a href="/clientside/showcoursevideo/{{r.Course_Id}}">
+                            <img class="img-responsive" src="{{r.Series_Image.url}}" alt="">
+                        </a>
+                        <span class="featured-video-play-add">
+
+                        </span>
+                    </div>
+                    <div class="text-dark">
+                        <p class="fs-1">{{r.Series_Name}}</p>
+                        <p class="fs-2">{{r.Trainer_Id.U_Fname}} {{r.Trainer_Id.U_Lname}}</p>
+                        <p class="fs-3">{{r.Category_Id}}</p>
+                    </div>
+                </div>
+
+
+
+                {% endfor %}
+            </div>
+        </marquee>
+        </section>
+        <!-- /Team Area -->
+     <!--    <section class="instagram-area section-padding">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h2>DIFFERENT COURSES PROGRAMS WE OFFER</h2>
+                        <p>Follow us</p>
+                    </div>
+                </div>
+              
+                <div class="col-md-12">
+                    
+                    <div class="blog-slider owl-carousel">
+                          {% for r in recentcourse %}
+                        <div class="single-blog">
+                            <div class="single-blog-img">
+                                 <a href="/clientside/showcoursevideo/{{r.Course_Id}}">
+                                <img class="img-responsive" src="{{r.Series_Image.url}}" alt="" />
+                                 </a>
+                                <p class="absolute blog-cal">E-Learning Platform</p>
+                            </div>
+                            <div class="single-blog-content">
+                               <a href="/clientside/showcoursevideo/{{r.Course_Id}}">
+                                    <h4>{{r.Series_Name}}</h4>
+                                </a>
+                                <br>
+                                <h4>
+                                    Trainer Name: 
+                                </h4>
+                                <a href="/clientside/showcoursevideo/{{r.Course_Id}}" class="default-button dark-bg">{{r.Trainer_Id.U_Fname}} {{r.Trainer_Id.U_Lname}}</a>
+                                <h4>Course Difficulty:</h4>
+
+                                <a href="/clientside/showcoursevideo/{{r.Course_Id}}" class="default-button dark-bg">{{r.Category_Id}}</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                     
+                </div>
+               
+            </div>
+        </section> -->
+        <!-- Blog Area -->
+        <!-- Newest Area -->
+       
+        <!-- /Newest Area -->
+        <hr>
+
+        <section class="team-area section-padding">
+            <div class="section-title">
+                <h4>DIFFERENT SINGLE COURSES VIDEOS WE OFFER</h4>
+            </div>
+        <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+            <div class="home-items owl-carousel">
+               {% for r in recentvideo %}
+
+                <div class="single-insta">
+                    <div class="featured-video position-relative">
+                        <a href="/clientside/showsinglevideo/{{r.Single_Video_id}}">
+                                <img class="img-responsive" src="{{r.Thumbnail.url}}" alt="" />
+                                 </a>
+                        <span class="featured-video-play-add">
+
+                        </span>
+                    </div>
+                    <div class="text-dark">
+                        <p class="fs-1">{{r.Title_Name}}</p>
+                        <p class="fs-2">{{r.Trainer_Id.U_Fname}} {{r.Trainer_Id.U_Lname}}</p>
+                        <p class="fs-3">{{r.Category_Id}}</p>
+                    </div>
+                </div>
+
+
+
+                {% endfor %}
+            </div>
+        </marquee>
+        </section>
+
+        
+         <!--    <section class="instagram-area section-padding">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h2>DIFFERENT SINGLE COURSES VIDEOS WE OFFER</h2>
+                        <p>Follow us</p>
+                    </div>
+                </div>
+              
+                <div class="col-md-12">
+                    
+                    <div class="blog-slider owl-carousel">
+                           {% for r in recentvideo %}
+                        <div class="single-blog">
+                            <div class="single-blog-img">
+                                 <a href="/clientside/showsinglevideo/{{r.Single_Video_id}}">
+                                <img class="img-responsive" src="{{r.Thumbnail.url}}" alt="" />
+                                 </a>
+                                <p class="absolute blog-cal">E-Learning Platform</p>
+                            </div>
+                            <div class="single-blog-content">
+                               <a href="/clientside/showsinglevideo/{{r.Single_Video_id}}">
+                                    <h4>{{r.Title_Name}}</h4>
+                                </a>
+                                <br>
+                                <h4>
+                                    Trainer Name: 
+                                </h4>
+                                <a href="/clientside/showsinglevideo/{{r.Single_Video_id}}" class="default-button dark-bg">{{r.Trainer_Id.U_Fname}} {{r.Trainer_Id.U_Lname}}</a>
+                                <h4>Course Difficulty:</h4>
+
+                                <a href="/clientside/showsinglevideo/{{r.Single_Video_id}}" class="default-button dark-bg">{{r.Category_Id}}</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                     
+                </div>
+               
+            </div>
+        </section> -->
+        <hr>
+        <section class="home-area section-padding">
+            <div class="section-title">
+                <h4>Get to Know Our Instructors</h4>
+            </div>
+        <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+            <div class="home-items owl-carousel">
+                {% for r in recentteacher %}
+
+                <div class="single-insta">
+                    <div class="featured-video position-relative">
+                        <a href="/clientside/showteacherprofile/{{r.Trainer_Account_Id}}">
+                            <img class="img-responsive" src="{{r.U_Image.url}}" alt="">
+                        </a>
+                        <span class="featured-video-play-add">
+
+
+                            </i></span>
+                    </div>
+                    <div class="text-dark">
+
+                        <p class="fs-2">{{r.U_Fname}} {{r.U_Lname}}</p>
+
+                    </div>
+                </div>
+
+
+
+                {% endfor %}
+            </div>
+        </marquee>
+        </section>
+         <!-- <section class="instagram-area section-padding">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h2>Get to Know Our Instructors</h2>
+                        <p>Follow us</p>
+                    </div>
+                </div>
+              
+                <div class="col-md-12">
+                    
+                    <div class="blog-slider owl-carousel">
+                           {% for r in recentteacher %}
+                        <div class="single-blog">
+                            <div class="single-blog-img">
+                                 <a href="/clientside/showteacherprofile/{{r.Trainer_Account_Id}}">
+                                <img class="img-responsive" src="{{r.U_Image.url}}" alt="" />
+                                 </a>
+                                <p class="absolute blog-cal">E-Learning Platform</p>
+                            </div>
+                            <div class="single-blog-content">
+                               <a href="/clientside/showteacherprofile/{{r.Trainer_Account_Id}}">
+                                    <h4>{{r.Title_Name}}</h4>
+                                </a>
+                                <br>
+                                <h4>
+                                    Trainer Name: 
+                                </h4>
+                                <a href="/clientside/showteacherprofile/{{r.Trainer_Account_Id}}" class="default-button dark-bg">{{r.U_Fname}} {{r.U_Lname}}</a>
+                               
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+                     
+                </div>
+               
+            </div>
+        </section> -->
+    </div>
+    <!-- Footer Area -->
+
+
+    <!-- /Footer Area -->
+
+</div>
+<!-- /Page Wrapper -->
+{% endblock body %}

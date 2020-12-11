@@ -1,0 +1,263 @@
+{% extends "clientside/base.html" %} {% load static %} {% block body %}
+<style>
+    #my-video{
+        width:100%;
+        height: 500px;
+    }
+</style>    
+
+
+<body>
+    <!-- Header Area -->
+    <!-- Preloader -->
+
+    <!-- /Preloader -->
+    <!-- /Header Area -->
+
+    <!-- Custom Page Header -->
+    <section class="custom-header fill">
+        <h1></h1>
+        <div class="header-inner">
+            <div class="header-table" style="width:100%; height:100%;">
+                <video
+                id="my-video"
+                class="video-js"
+                controls
+                preload="auto"
+                width="640"
+                height="264"
+                poster="{{data.Thumbnail.url}}"
+                data-setup="{}"
+              >
+                <source src="{{data.Video.url}}" type="video/mp4" />
+                <source src="{{data.Video.url}}" type="video/webm" />
+                <p class="vjs-no-js">
+                  To view this video please enable JavaScript, and consider upgrading to a
+                  web browser that
+                  <a href="https://videojs.com/html5-video-support/" target="_blank"
+                    >supports HTML5 video</a
+                  >
+                </p>
+              </video>
+            </div>
+        </div>
+    </section>
+    <!-- /Custom Page Header -->
+
+    <div class="page-wrapper">
+        <section class="about-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="section-title theme-heading">
+                            <h2>{{data.Title_Name}}</h2>
+                            <a href="/clientside/showteacherprofile/{{data.Trainer_Id}}" class="mb-50">{{data.Trainer_Id.Username}}</a>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+            <div id="exTab1">
+                <!-- <ul class="nav nav-pills">
+                    <li class="active">
+                        <a href="#1a" data-toggle="tab">Overview</a>
+                    </li>
+                    <li><a href="#2a" data-toggle="tab">Classes</a>
+                    </li>
+                </ul> -->
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="1a">
+                        <div class="section-padding">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2>Read More Read Less Button</h2>
+                                        <p>{{data.Decsription | slice:":300"}}
+                                            <span id="dots">...</span>
+                                            <span id="more">
+                                                {{data.Decsription | slice:"300:"}}
+
+
+                                            </span>
+                                        </p>
+                                        <button class="btn btn-link" onclick="myFunction()" id="myBtn">Read
+                                            more</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="featured-video">
+                                            <img class="img-responsive" src="{{data.Thumbnail.url}}" alt="">
+                                            <a href="" class=""><i class="fa fa-play"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-grey section-padding">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="about-content-2">
+                                            <div class="s-image">
+                                                <img src="{{data.Trainer_Id.U_Image.url}}" alt="" style="width:200px ; height:200px;">
+                                                <div class="d-inline-block position-relative" style="top: 10px">
+                                                    <h5><a href="/clientside/showteacherprofile/{{data.Trainer_Id.Trainer_Account_Id}}">Teacher Profile</a></h5>
+                                                    <h4><a href="/clientside/showteacherprofile/{{data.Trainer_Id.Trainer_Account_Id}}">{{data.Trainer_Id.U_Fname}}
+                                                            {{data.Trainer_Id.U_Lname}}</a></h4>
+                                                </div>
+                                            </div>
+
+                                            <p>
+                                                {{data.Trainer_Id.U_Desc | slice:":300"}}
+                                                <span id="dots1">...</span>
+                                                <span id="more1">{{data.Trainer_Id.U_Desc | slice:"300:"}}.</span>
+                                            </p>
+                                            <button class="btn btn-link" onclick="myFunction1()" id="myBtn1">Read
+                                                more</button>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div class="about-content-2">
+
+
+                                            <div>
+                                                <h5>DIFFICULTY</h5>
+                                                <div class="about-content-2-single">
+                                                    <h6>
+                                                        <svg class="codicon codicon-intensity difficulty-icon" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                                                            <title>Difficulty—Intermediate—Outlined Copy</title>
+                                                            <desc>Created with Sketch.</desc>
+                                                            <defs></defs>
+                                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none"
+                                                                fill-rule="evenodd">
+                                                                <g id="Difficulty—Intermediate—Outlined-Copy"
+                                                                    fill="#000000" fill-rule="nonzero">
+                                                                    <g id="Group-17-Copy-8"
+                                                                        transform="translate(-0.544912, -0.819812)">
+                                                                        <g id="Group"
+                                                                            transform="translate(0.582573, 0.496362)">
+                                                                            <path
+                                                                                d="M3,31.7260202 L3,22.9461329 C3,22.1177057 2.32842712,21.4461329 1.5,21.4461329 C0.671572875,21.4461329 -4.23138169e-16,22.1177057 -4.4408921e-16,22.9461329 L-6.66133815e-16,31.7260202 C-6.87084855e-16,32.5544473 0.671572875,33.2260202 1.5,33.2260202 C2.32842712,33.2260202 3,32.5544473 3,31.7260202 Z"
+                                                                                id="Line"></path>
+                                                                            <path
+                                                                                d="M12.9,31.7237572 L12.9,15.9109621 C12.9,15.082535 12.2284271,14.4109621 11.4,14.4109621 C10.5715729,14.4109621 9.9,15.082535 9.9,15.9109621 L9.9,31.7237572 C9.9,32.5521843 10.5715729,33.2237572 11.4,33.2237572 C12.2284271,33.2237572 12.9,32.5521843 12.9,31.7237572 Z"
+                                                                                id="Line-Copy-2"></path>
+                                                                            <path
+                                                                                d="M22.8733333,31.7430416 L22.8733333,8.7944609 C22.8733333,7.96603377 22.2017605,7.2944609 21.3733333,7.2944609 C20.5449062,7.2944609 19.8733333,7.96603377 19.8733333,8.7944609 L19.8733333,31.7430416 C19.8733333,32.5714688 20.5449062,33.2430416 21.3733333,33.2430416 C22.2017605,33.2430416 22.8733333,32.5714688 22.8733333,31.7430416 Z"
+                                                                                id="Line-Copy-3"></path>
+                                                                            <path
+                                                                                d="M32.8662222,31.761412 L32.8662222,1.96712327 C32.8662222,1.13869614 32.1946493,0.467123268 31.3662222,0.467123268 C30.5377951,0.467123268 29.8662222,1.13869614 29.8662222,1.96712327 L29.8662222,31.761412 C29.8662222,32.5898391 30.5377951,33.261412 31.3662222,33.261412 C32.1946493,33.261412 32.8662222,32.5898391 32.8662222,31.761412 Z"
+                                                                                id="Line-Copy-4" opacity="0.200000003">
+                                                                            </path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </svg> {{data.Difficulty}}
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h5>INTENSITY</h5>
+                                                <div class="about-content-2-single">
+                                                    <h6>
+                                                        <svg class="codicon codicon-intensity-3" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                                                            <title>Intensity 3—Outlined Copy</title>
+                                                            <desc>Created with Sketch.</desc>
+                                                            <defs></defs>
+                                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none"
+                                                                fill-rule="evenodd">
+                                                                <g id="Intensity-3—Outlined-Copy" fill="#000000"
+                                                                    fill-rule="nonzero">
+                                                                    <g id="Group-17-Copy-8"
+                                                                        transform="translate(-0.544912, -1.819812)">
+                                                                        <g id="Group"
+                                                                            transform="translate(17.082573, 17.996362) rotate(-90.000000) translate(-17.082573, -17.996362) translate(0.082573, 0.996362)">
+                                                                            <path
+                                                                                d="M3.30220611,21.3548111 L3.30220611,12.5749238 C3.30220611,11.7464967 2.63063323,11.0749238 1.80220611,11.0749238 C0.973778984,11.0749238 0.302206108,11.7464967 0.302206108,12.5749238 L0.302206108,21.3548111 C0.302206108,22.1832383 0.973778984,22.8548111 1.80220611,22.8548111 C2.63063323,22.8548111 3.30220611,22.1832383 3.30220611,21.3548111 Z"
+                                                                                id="Line"></path>
+                                                                            <path
+                                                                                d="M13.2022061,24.871265 L13.2022061,9.05846996 C13.2022061,8.23004283 12.5306332,7.55846996 11.7022061,7.55846996 C10.873779,7.55846996 10.2022061,8.23004283 10.2022061,9.05846996 L10.2022061,24.871265 C10.2022061,25.6996921 10.873779,26.371265 11.7022061,26.371265 C12.5306332,26.371265 13.2022061,25.6996921 13.2022061,24.871265 Z"
+                                                                                id="Line-Copy-2"></path>
+                                                                            <path
+                                                                                d="M23.1755394,28.4391578 L23.1755394,5.49057709 C23.1755394,4.66214997 22.5039666,3.99057709 21.6755394,3.99057709 C20.8471123,3.99057709 20.1755394,4.66214997 20.1755394,5.49057709 L20.1755394,28.4391578 C20.1755394,29.267585 20.8471123,29.9391578 21.6755394,29.9391578 C22.5039666,29.9391578 23.1755394,29.267585 23.1755394,28.4391578 Z"
+                                                                                id="Line-Copy-3"></path>
+                                                                            <path
+                                                                                d="M33.1684283,31.8620118 L33.1684283,2.0677231 C33.1684283,1.23929597 32.4968555,0.567723099 31.6684283,0.567723099 C30.8400012,0.567723099 30.1684283,1.23929597 30.1684283,2.0677231 L30.1684283,31.8620118 C30.1684283,32.690439 30.8400012,33.3620118 31.6684283,33.3620118 C32.4968555,33.3620118 33.1684283,32.690439 33.1684283,31.8620118 Z"
+                                                                                id="Line-Copy-4" opacity="0.200000003">
+                                                                            </path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </svg> {{data.Intensity}}</h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+        <div class="container">
+            <section class="home-area section-padding">
+                <div class="section-title mt-5">
+                    <h4>{{s.Title_Name}}</h4>
+
+
+                </div>
+
+
+
+
+
+                <!-- <div class="home-items owl-carousel">
+                    <video width="400" height="240 ">
+                        <source src="{{s.Video.url}} " type="video/mp4 ">
+                        
+                      </video> -->
+
+                <!-- <a href=" ">
+                        <div class="single-insta ">
+                            <div class="featured-video position-relative ">
+                                <img class="img-responsive " src=" " alt="{{s.Thumbnail.url}} ">
+
+
+
+
+
+
+                                <span class="featured-video-play "><i class="fa fa-play "></i></span>
+                            </div>
+                        </div> -->
+
+
+                <!-- </div> -->
+
+
+            </section>
+        </div>
+
+        <!-- Footer Area -->
+
+        <!-- /Footer Area -->
+        </div>
+        <div>
+   
+
+  <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+<!--             
+            <video width="900" height="450" controls="controls" poster="image" preload="true">
+              <source src="{{s.Video.url}}" type="video/mp4" width="100%"/>
+              
+            </video> -->
+
+        </div>
+      
+        {% endblock body %}

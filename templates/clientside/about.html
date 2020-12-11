@@ -1,0 +1,165 @@
+{% extends "clientside/base.html" %} {% load static %} {% block body %}
+<style>
+    @media screen and (min-width:786px) {
+        .display-2 {
+            text-transform: uppercase !important;
+            font-size: 4.5rem !important;
+        }
+        .col-md-12.my-5.text-center {
+            margin-top: 70px !important;
+            margin-bottom: 10rem !important;
+        }
+    }
+    
+    .mb-30 {
+        font-weight: lighter !important;
+        font-family: 'Times New Roman', Times, serif !important;
+    }
+    
+    @media screen and (max-width:786px) {
+        .col-md-12.my-5.text-center {
+            margin-top: 101px !important;
+            margin-bottom: 4rem !important;
+        }
+        .display-2 {
+            text-transform: uppercase !important;
+            font-size: 3rem !important;
+        }
+    }
+    
+    @media screen and (max-width:500px) {
+        .col-md-12.my-5.text-center {
+            margin-top: 101px !important;
+            margin-bottom: 4rem !important;
+        }
+        .display-2 {
+            text-transform: uppercase !important;
+            font-size: 2.5rem !important;
+        }
+    }
+</style>
+
+<!-- Header Area -->
+<!-- Preloader -->
+
+<!-- /Preloader -->
+<!-- /Header Area -->
+<!-- Custom Page Header -->
+<section class="custom-header fill dark-overlay" style="background:url(/static/clientside/images/banner/15.jpg) no-repeat fixed;">
+    <div class="header-inner">
+        <div class="header-table">
+            <h2 style="font-size:5em;">Improving Lives Through Learning</h2>
+            <p><a class="brdcrm-home" href="/clientside/about">Home</a> &mdash; About</p>
+        </div>
+    </div>
+</section>
+<!-- /Custom Page Header -->
+
+<div class="page-wrapper">
+    <!-- About Area -->
+    <section class="about-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                    <div class="about-img">
+                        <img class="img-responsive" src="{% static '' %}clientside/images/wht-frm.jpg" alt="" />
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                    <div class="about-content">
+                        <div class="section-title">
+                            <h1><b>EDUCATORS</b></h1>
+                        </div>
+                        <p>A E-Learning Platform</p>
+                        <p>Educatorss offers practice exercises, instructional videos, and a personalized learning dashboard that empower learners to study at their own pace in and outside of the classroom. We tackle math, science, computing, history, art
+                            history, economics, and more, including K-14 and test preparation (SAT, Praxis, LSAT) content. We focus on skill mastery to help learners establish strong foundations, so there's no limit to what they can learn next!</p>
+                        <img class="pull-left" src="images/Signature.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Slider Area -->
+    <div class="slider-area">
+        <div class="slider-content owl-carousel">
+            <div class="single-slider dark-overlay" style="background-image:url(images/banner/2.jpg);">
+                <div class="slider-box">
+                    <div class="table-cell">
+                        <div class="col-md-6 col-xs-12 col-sm-12 col-md-offset-3">
+                            <div class="slider-caption">
+                                <div class="slider-cap-content white-overlay text-uppercase">
+                                    <h2 class="mb-30">Educator, I greatly appreciate your videos! Not only did I pass Calculus last year with a 96%, but I also discovered my love for the subject - something I had never experienced before truly understanding the mathematical
+                                        content and the uses of it.</h2>
+                                    <h3 class="mt-4">KELVIN KLIEN</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slider dark-overlay" style="background-image:url(images/banner/1.jpg);">
+                <div class="slider-box">
+                    <div class="table-cell">
+                        <div class="col-md-6 col-xs-12 col-sm-12 col-md-offset-3">
+                            <div class="slider-caption">
+                                <div class="slider-cap-content white-overlay text-uppercase">
+                                    <h2 class="mb-30">Educator, I greatly appreciate your videos! Not only did I pass Calculus last year with a 96%, but I also discovered my love for the subject - something I had never experienced before truly understanding the mathematical
+                                        content and the uses of it.</h2>
+                                    <h3 class="mt-4">KELVIN KLIEN</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slider dark-overlay" style="background-image:url(images/banner/3.jpg);">
+                <div class="slider-box">
+                    <div class="table-cell">
+                        <div class="col-md-6 col-xs-12 col-sm-12 col-md-offset-3">
+                            <div class="slider-caption">
+                                <div class="slider-cap-content white-overlay text-uppercase">
+                                    <h2 class="mb-30">Educator, I greatly appreciate your videos! Not only did I pass Calculus last year with a 96%, but I also discovered my love for the subject - something I had never experienced before truly understanding the mathematical
+                                        content and the uses of it.</h2>
+                                    <h3 class="mt-4">KELVIN KLIEN</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Slider Area -->
+    <!-- /About Area -->
+    <!-- Footer Area -->
+
+    <!-- /Footer Area -->
+</div>
+<!-- /Page Wrapper -->
+
+<script>
+    //Filter Recruiters
+    $('select#sort-recruiters').change(function() {
+        var filter = $(this).val();
+        filterList(filter);
+    });
+
+    // Recruiters filter function
+    function filterList(value) {
+        var list = $(".recruiter .recruiter-info");
+        $(list).hide();
+        if (value == "All") {
+            $(".recruiter").find("div").each(function(i) {
+                $(this).show();
+            });
+        } else {
+            // *=" means that if a data-custom type contains multiple values, it will find them
+            $(".recruiter").find("div[data-custom-type*=" + value + "]").each(function(i) {
+                $(this).show();
+            });
+        }
+    }
+</script>
+
+
+{% endblock body %}

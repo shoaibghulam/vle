@@ -1,0 +1,78 @@
+{% extends "clientside/base.html" %} {% load static %} {% block body %}
+
+<!-- Header Area -->
+<!-- Preloader -->
+
+<!-- /Preloader -->
+<!-- /Header Area -->
+<!-- Custom Page Header -->
+<section class="custom-header fill dark-overlay" style="background:url/static/images/banner/15.jpg) no-repeat fixed;">
+    <div class="header-inner">
+        <div class="header-table">
+            <h2 style="font-size:5em;">Subscription Packages</h2>
+            <p><a class="brdcrm-home" href="/clientside/">Home</a> &mdash; Subscribe</p>
+        </div>
+    </div>
+</section>
+<!-- /Custom Page Header -->
+
+<div class="page-wrapper">
+    <!-- teacher Galarry -->
+    <section class="teacher-galarry section-padding">
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-1"></div>
+                    {% for d in data %}
+
+
+                    <div class="col-md-4 text-center p-5 pt-average pb-average card">
+                        <div class="col-md-12">
+                            <h1 class="">{{d.Package_subscription}}</h1>
+                        </div>
+                        <div class="col-md-12">
+                            <h5>Gain Without Tutor</h5>
+                        </div>
+                        <div class="col-md-12">
+                            <h3>{{d.Amount}}$</h3>
+                            <h5 class="text-muted">Monthly</h5>
+                        </div>
+                        <div class="col-md-12 mt-3 text-center mt-5">
+                            <a href="/clientside/payment/{{d.Package_Id}}" class="btn btn-black">Enroll Now</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="col-md-2"></div> -->
+                    <!-- <div class="col-md-4 text-center p-5 pt-average pb-average card">
+                        <div class="col-md-12">
+                            <h1 class="">Premium</h1>
+                        </div>
+                        <div class="col-md-12">
+                            <h5>Gain Without Tutor</h5>
+                        </div>
+                        <div class="col-md-12">
+                            <h3>115$</h3>
+                            <h5 class="text-muted">Yearly</h5>
+                        </div>
+                        <div class="col-md-12 mt-3 text-center mt-5">
+                            <a href="/clientside/payment" class="btn btn-black">Enroll Now</a>
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-md-2"></div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /teacher Galarry -->
+    <!-- Footer Area -->
+
+    <!-- /Footer Area -->
+</div>
+<!-- /Page Wrapper -->
+
+{% endblock body %}
+
+</html>

@@ -1,0 +1,81 @@
+{% extends "clientside/base.html" %} {% load static %} {% block body %}
+
+<body>
+    <!-- Header Area -->
+    <!-- Preloader -->
+
+    <!-- /Preloader -->
+    <!-- /Header Area -->
+    <!-- Custom Page Header -->
+    <section class="custom-header h-50 fill bg-grey">
+        <div class="header-inner">
+            <div class="header-table pt-average">
+                <span class="display-2 text-dark"><b>Sign Up</b></span>
+            </div>
+        </div>
+    </section>
+
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} mb-0 alert-dismissible fade show" role="alert">
+            <strong>Message:</strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+        </div>
+        {% endfor %}
+    <!-- /Custom Page Header -->
+
+    <div class="page-wrapper">
+
+        <section class="setting-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 m-auto float-none">
+
+
+                        <form action="/clientside/Referencesignup/{{teacher.Trainer_Account_Id}}" method="POST" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+
+                            <input placeholder="Username" id="username" name="username" type="text" required="">
+                            <input placeholder="First Name" id="f_name" name="fname" type="text" required="">
+                            <input placeholder="Last Name" id="l_name" name="lname" type="text" required="">
+                            <input placeholder="Email Address" id="email_link" name="email" type="email" required="">
+                            <input placeholder="Contact No" id="contact_no" name="phone" type="text" required="">
+                            <div class="selection-box">
+                                <select name="gender" required="" name="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">female</option>
+                                </select>
+                            </div>
+                            <input placeholder="Date Of Birth" name="dob" type="date" style="margin-bottom: 9px !important;" required="">
+                            <input placeholder="Referral Code Here (Optinal)" name="ref_code" type="text" value="{{teacher.Referal_Code}}" readonly>
+
+                            
+                            <input placeholder="Password" name="password" type="password" required="">
+
+
+                            <textarea rows="2" name="U_Desc" placeholder="Desciption" required></textarea>
+                            <input type="file" name="image" required>
+
+                            <div class="text-center">
+                                <button class="btn alo-button w-100 fs-2" type="submit">SIGNUP</button>
+                                <div class="mt-3">
+                                    <p>Do you have an account? <a href="/clientside/signin" class="text-dark pb-2"><u>Signin</u></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- Footer Area -->
+
+        <!-- /Footer Area -->
+    </div>
+    <!-- /Page Wrapper -->
+
+
+    {% endblock body %}
