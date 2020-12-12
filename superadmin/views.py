@@ -9,15 +9,15 @@ from django.core.mail import send_mail,EmailMultiAlternatives
 import xlwt
 
 
-# Create your views here.
+## Create your views here.
 def index(request):
     if not request.session.has_key('adminid'):
         return redirect('/superadmin/login')
-    try:
-        studentData = User_Account.objects.all().order_by('-User_Account_Id')
-        return render(request,'superadmin/users.html',{'data':studentData})
-    except:
-        return redirect('/superadmin/')
+    # try:
+    studentData = User_Account.objects.all().order_by('-User_Account_Id')
+    return render(request,'superadmin/users.html',{'data':studentData})
+    # except:
+        # return redirect('/superadmin/')
     
 
 
