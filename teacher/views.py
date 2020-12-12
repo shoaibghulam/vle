@@ -11,6 +11,18 @@ def index(request):
     try:
         if not request.session.has_key('trainerid'):
             return redirect('/superadmin/teacherlogin')
+        # Status teacher code start here
+        if request.session.has_key('trainerid'):
+            state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+            if state.Status=="inactive":
+                messages.error(request,"Your Account has been Deactivate")
+                return redirect('/teacherpannel/logout')
+        # Status teacher code end here
+        
+
+           
+            
+        
 
         data=User_Account.objects.filter(Refered_by_Trainer=request.session['trainerid'])
         return render(request,'teacher/referals.html',{'data':data})
@@ -26,6 +38,14 @@ def series(request):
     try:
         if not request.session.has_key('trainerid'):
             return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+        if request.session.has_key('trainerid'):
+            state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+            if state.Status=="inactive":
+                messages.error(request,"Your Account has been Deactivate")
+                return redirect('/teacherpannel/logout')
+        # Status teacher code end here
 
 
         if request.method=="POST":
@@ -54,6 +74,17 @@ def series(request):
 
 ##Delete Course
 def deletecourse(request,id):
+    if not request.session.has_key('trainerid'):
+        return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+    if request.session.has_key('trainerid'):
+        state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+        if state.Status=="inactive":
+            messages.error(request,"Your Account has been Deactivate")
+            return redirect('/teacherpannel/logout')
+        # Status teacher code end here
+
     try:
         fetchdata = Course.objects.get(Course_Id = id)
         fetchdata.delete()
@@ -67,6 +98,17 @@ def deletecourse(request,id):
 
 ##edit_course
 def edit_showcourse(request):
+    if not request.session.has_key('trainerid'):
+            return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+    if request.session.has_key('trainerid'):
+        state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+        if state.Status=="inactive":
+            messages.error(request,"Your Account has been Deactivate")
+            return redirect('/teacherpannel/logout')
+        # Status teacher code end here
+
     try:
         if request.method == "POST":
             courseid=request.POST['courseid']
@@ -114,6 +156,16 @@ def edit_showcourse(request):
 # changerequest
 
 def changerequest(request):
+    if not request.session.has_key('trainerid'):
+            return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+    if request.session.has_key('trainerid'):
+        state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+        if state.Status=="inactive":
+            messages.error(request,"Your Account has been Deactivate")
+            return redirect('/teacherpannel/logout')
+        # Status teacher code end here
     try:
         if request.method == "POST":
             courseID = request.POST['courseid']
@@ -132,9 +184,18 @@ def changerequest(request):
 
 ##Trainer videos add and show
 def video(request):
-    try:
-        if not request.session.has_key('trainerid'):
+    if not request.session.has_key('trainerid'):
             return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+    if request.session.has_key('trainerid'):
+        state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+        if state.Status=="inactive":
+            messages.error(request,"Your Account has been Deactivate")
+            return redirect('/teacherpannel/logout')
+        # Status teacher code end here
+    try:
+        
 
         if request.method=="POST":
             Trainer_Id=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
@@ -167,6 +228,16 @@ def video(request):
 
 #deletevideo
 def deletevideo(request,id):
+    if not request.session.has_key('trainerid'):
+        return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+    if request.session.has_key('trainerid'):
+        state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+        if state.Status=="inactive":
+            messages.error(request,"Your Account has been Deactivate")
+            return redirect('/teacherpannel/logout')
+        # Status teacher code end here
     try:
         fetchdata = Subject_Video.objects.get(Subject_Video_Id = id)
         fetchdata.delete()
@@ -179,6 +250,16 @@ def deletevideo(request,id):
 
 ###Edit Video
 def videoeditshow(request):
+    if not request.session.has_key('trainerid'):
+        return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+    if request.session.has_key('trainerid'):
+        state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+        if state.Status=="inactive":
+            messages.error(request,"Your Account has been Deactivate")
+            return redirect('/teacherpannel/logout')
+        # Status teacher code end here
     try:
         if request.method == "POST":
             subjid=request.POST['subjid']
@@ -228,6 +309,16 @@ def videoeditshow(request):
 
 ##Upload single course video
 def uploadsinglevideo(request):
+    if not request.session.has_key('trainerid'):
+        return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+    if request.session.has_key('trainerid'):
+        state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+        if state.Status=="inactive":
+            messages.error(request,"Your Account has been Deactivate")
+            return redirect('/teacherpannel/logout')
+        # Status teacher code end here
     try:
         if request.method=="POST":
             Trainer_Id=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
@@ -255,6 +346,16 @@ def uploadsinglevideo(request):
 
 ###Delete single video
 def deletesinglevideo(request,id):
+    if not request.session.has_key('trainerid'):
+            return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+    if request.session.has_key('trainerid'):
+        state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+        if state.Status=="inactive":
+            messages.error(request,"Your Account has been Deactivate")
+            return redirect('/teacherpannel/logout')
+        # Status teacher code end here
     try:
         data=Single_Video.objects.get(Single_Video_id=id)
         data.delete()
@@ -267,6 +368,16 @@ def deletesinglevideo(request,id):
 
 ##Edit single course video
 def show_edit_singlevideo(request):
+    if not request.session.has_key('trainerid'):
+        return redirect('/superadmin/teacherlogin')
+
+             # Status teacher code start here
+    if request.session.has_key('trainerid'):
+        state=Trainer_Account.objects.get(Trainer_Account_Id=request.session['trainerid'])
+        if state.Status=="inactive":
+            messages.error(request,"Your Account has been Deactivate")
+            return redirect('/teacherpannel/logout')
+        # Status teacher code end here
 
     try:
     

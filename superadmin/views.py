@@ -774,6 +774,10 @@ def teacherlogin(request):
             password = request.POST['password']
             checkAuthenticate = Trainer_Account.objects.get(U_Email = email)
             if checkAuthenticate:
+                if checkAuthenticate.Status =="inactive":
+                    messages.error(request,'Your Account has been Deactivate')
+                    return redirect('/superadmin/teacherlogin')
+                    
                 if checkAuthenticate.SPassword == password:
                     request.session['trainerid'] = checkAuthenticate.Trainer_Account_Id
                     request.session['userName'] = checkAuthenticate.Username
