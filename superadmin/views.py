@@ -8,7 +8,7 @@ from superadmin.models import AdminAccount,Category,Ser_Category,User_Account,Tr
 from django.core.mail import send_mail,EmailMultiAlternatives
 import xlwt
 
-
+x="baloch"
 ## Create your views here.
 def index(request):
     if not request.session.has_key('adminid'):
