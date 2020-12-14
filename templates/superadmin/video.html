@@ -56,7 +56,7 @@
                         <th>Uploaded By</th>
                         <th>Uploaded At</th>
 
-                        <th>Status</th>
+                       
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -79,11 +79,7 @@
 
 
 
-                        <td>
-                            <div class="kt-widget__label">
-                                <span class="btn btn-label-danger w-100 btn-sm btn-bold btn-upper ">Active</span>
-                            </div>
-                        </td>
+                       
 
                         <td style="padding: 4px">
                           
@@ -239,7 +235,7 @@
                                         <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg)"></div>
                                         <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Upload Logo">
                                             <i class="fa fa-pen"></i>
-                                            <input type="file" name="Thumbnail" accept=".png, .jpg, .jpeg" onchange="show(this)" required> 
+                                            <input type="file" name="Thumbnail" accept=".png, .jpg, .jpeg" title="Select a image" onchange="show(this)" required> 
                                         </label>
                                         <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
                                             <i class="fa fa-times"></i>
@@ -374,16 +370,19 @@
                                         <div class="dropzone dropzone-multi" id="kt_dropzone_5">
                                             <div class="dropzone-panel">
                                                 <!-- <a class="dropzone-select btn btn-label-brand btn-bold btn-sm dz-clickable">Attach files</a> -->
-                                                <input type="file" name="Video" id="Video" accept="video/mp4,video/x-m4v,video/*">
+                                                <input type="file" name="Video" id="Video" accept="video/mp4,video/x-m4v,video/*" onchange="videotype(this)">
                                             </div>
+                                         
                                             <div class="dropzone-items">
 
                                             </div>
                                             <div class="dz-default dz-message"><button class="dz-button" type="button">Drop files here to upload</button></div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div id="errorvideo"></div>
                             <div class="form-group row">
                                 <label class="col-xl-4 col-lg-4 col-form-label">Upload Thumbnail</label>
                                 <div class="col-lg-8 col-xl-8">
@@ -391,7 +390,7 @@
                                         <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg)"></div>
                                         <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Upload Logo">
                                             <i class="fa fa-pen"></i>
-                                            <input type="file" name="Thumbnail" id="Thumbnail" accept=".png, .jpg, .jpeg" > 
+                                            <input type="file" name="Thumbnail" id="Thumbnail" accept=".png, .jpg, .jpeg" onchange="show(this)"> 
                                         </label>
                                         <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
                                             <i class="fa fa-times"></i>
@@ -443,7 +442,7 @@
     }
     function videotype(input) {
         debugger;
-        var validExtensions = ['mp4','avi','mkv','mpeg']; //array of valid extensions
+        var validExtensions = ['mp4','avi','m4v','mpeg']; //array of valid extensions
         var fileName = input.files[0].name;
         var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
         if ($.inArray(fileNameExt, validExtensions) == -1) {
@@ -451,7 +450,7 @@
             input.type = 'file'
            
             
-         $('#errorvideo').html("<p style='color:red; font-size:15px'>Allowed file types: mp4, avi, jpeg.</p>");
+         $('#errorvideo').html("<p style='color:red; font-size:15px'>Allowed file types: mp4, avi, m4v.</p>");
          
         }
         else

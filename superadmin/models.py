@@ -182,6 +182,7 @@ class Course(models.Model):
 
 class Ser_Course(serializers.ModelSerializer):
     trianer_name=serializers.ReadOnlyField(source="Trainer_Id.U_Fname")
+    # trianer_name= Ser_Trainer(Trainer_Account,many=True , read_only=True)
     category_name=serializers.ReadOnlyField(source="Category_Id.C_Name")
     class Meta:
         model = Course
