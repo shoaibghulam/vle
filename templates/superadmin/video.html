@@ -221,8 +221,9 @@
                                         <div class="dropzone dropzone-multi" id="kt_dropzone_5">
                                             <div class="dropzone-panel">
                                                 <!-- <a class="dropzone-select btn btn-label-brand btn-bold btn-sm dz-clickable">Attach files</a> -->
-                                                <input type="file" name="Video" required accept="video/mp4,video/x-m4v,video/*">
+                                                <input type="file" name="Video" required accept="video/mp4,video/x-m4v,video/*" onchange="videotype(this)" required>
                                             </div>
+                                            <div id="errorvideo"></div>
                                             <div class="dropzone-items">
 
                                             </div>
@@ -435,6 +436,32 @@
             var filerdr = new FileReader();
             filerdr.onload = function (e) {
                 $('#user_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+        }
+    }
+    function videotype(input) {
+        debugger;
+        var validExtensions = ['mp4','avi','mkv','mpeg']; //array of valid extensions
+        var fileName = input.files[0].name;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+        if ($.inArray(fileNameExt, validExtensions) == -1) {
+            input.type = ''
+            input.type = 'file'
+           
+            
+         $('#errorvideo').html("<p style='color:red; font-size:15px'>Allowed file types: mp4, avi, jpeg.</p>");
+         
+        }
+        else
+        {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+                $('#errorvideo').html("");
+         
             }
             filerdr.readAsDataURL(input.files[0]);
         }
