@@ -254,8 +254,8 @@ def video(request):
             return redirect('/superadmin/video')
         Subject=Subject_Video.objects.all()
         trainer=Trainer_Account.objects.all()
-        category=Category.objects.all()
-        course=Course.objects.all()
+        category=Category.objects.filter(Status="active")
+        course=Course.objects.filter(Status="active")
         return render(request,'superadmin/video.html',{'trainer':trainer,'category':category,'course':course,'subject':Subject})
     except:
         return redirect('/superadmin/video')
