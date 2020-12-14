@@ -238,13 +238,13 @@
                                         <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg)"></div>
                                         <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Upload Logo">
                                             <i class="fa fa-pen"></i>
-                                            <input type="file" name="Thumbnail" accept=".png, .jpg, .jpeg" required> 
+                                            <input type="file" name="Thumbnail" accept=".png, .jpg, .jpeg" onchange="show(this)" required> 
                                         </label>
                                         <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
                                             <i class="fa fa-times"></i>
                                         </span>
                                     </div>
-                                    <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                                    <p id="imgerror" class="form-text text-muted "  >Allowed file types: png, jpg, jpeg.</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -415,6 +415,33 @@
         </div>
     </div>
 </div>
+<script>
+    function show(input) {
+        debugger;
+        var validExtensions = ['jpg','png','jpeg']; //array of valid extensions
+        var fileName = input.files[0].name;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+        if ($.inArray(fileNameExt, validExtensions) == -1) {
+            input.type = ''
+            input.type = 'file'
+            $('#user_img').attr('src',"");
+            
+         $('#imgerror').attr("style", "color:red !important");
+         
+        }
+        else
+        {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+        }
+    }
+
+</script>
 <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
