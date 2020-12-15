@@ -187,7 +187,7 @@
 
                                                 <select class="form-control" name="Trainer_Id">
                                                     {% for t in trainer %}
-													<option value="{{t.Trainer_Account_Id}}">{{t.U_Fname}} {{t.U_Lname}}</option>
+<option value="{{t.Trainer_Account_Id}}">{{t.U_Fname}}$nbsp;{{t.U_Lname}}</option>
 													
                                                     {% endfor %}
                                                 </select>
@@ -292,7 +292,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Edit Series</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Course</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">X</span>
 				</button>
@@ -331,13 +331,13 @@
                                             <div class="col-lg-8">
 
 
-
                                                 <select class="form-control" name="Trainer_Id" id="Trainer_Id">
                                                     {% for t in trainer %}
-													<option value="{{t.Trainer_Account_Id}}">{{t.U_Fname}} {{t.U_Lname}}</option>
-													
+                                                    <option value="{{t.Trainer_Account_Id}}">{{t.U_Fname}}{{t.U_Lname}} </option>
+                                                    
                                                     {% endfor %}
                                                 </select>
+                                               
                                             </div>
                                         </div>
 
@@ -509,9 +509,9 @@
 </div>
 
 <!-- end:: Content -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
 
-<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
 
 <!-- Req VIDEO START -->
 
@@ -563,22 +563,19 @@
 
 
 
-                  console.log(data);
+                  //console.log(data);
                 var datas = eval(data);
-
-                $('#CategoryNAME').val(datas[0].category_name);
                 $('#Trainer_Id').val(datas[0].trianer_name);
+                     
+                $('#CategoryNAME').val(datas[0].category_name);
                 $('#Series_Name').val(datas[0].Series_Name);
                 $('#Decsription').val(datas[0].Decsription);
-                //$('#Trainer_Id').prepend(`<option value="{{t.}}">{{t.U_Fname}} {{t.U_Lname}}</option>`)
-                
-
                 $('#Difficulty').val(datas[0].Difficulty);
                 $('#Intensity').val(datas[0].Intensity);
                 $('#Status').val(datas[0].Status);
                 $('#courseid').val(id);
                 $('.kt-avatar__holder').css('background-image', 'url(' + datas[0].Series_Image+ ')');
-
+               
 
 
 
@@ -592,7 +589,7 @@
 
         });
     }
-
+ break;
     function deleteCategory(id) {
         if (window.confirm("Are You Sure to Delete Course")) {
             $.ajax({

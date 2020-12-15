@@ -445,42 +445,42 @@ def deletecourse(request):
 def edit_showcourse(request):
     if not request.session.has_key('adminid'):
         return redirect('/superadmin/login')
-    try:
-        if request.method == "POST":
-            courseid=request.POST['courseid']
-            CourseData = Course.objects.get(Course_Id = courseid)
-            Trainer_Id = CourseData.Trainer_Id.Trainer_Account_Id
-            Series_Name=request.POST['Series_Name']
-            Decsription=request.POST['Decsription']
-            CategoryName = request.POST['Category_Id']
-            Difficulty=request.POST['Difficulty']
-            Intensity=request.POST['Intensity']
-            Status=request.POST['Status']
-            CourseData.Trainer_Id = Trainer_Account.objects.get(Trainer_Account_Id = Trainer_Id)
-            CourseData.Series_Name = Series_Name
-            CourseData.Decsription = Decsription
-            CourseData.Category_Id = Category.objects.get(C_Name = CategoryName)
-            CourseData.Difficulty = Difficulty
-            CourseData.Intensity = Intensity
-            CourseData.Status = Status
+    # try:
+    if request.method == "POST":
+        courseid=request.POST['courseid']
+        CourseData = Course.objects.get(Course_Id = courseid)
+        Trainer_Id =request.POST['Trainer_Id']
+        Series_Name=request.POST['Series_Name']
+        Decsription=request.POST['Decsription']
+        CategoryName = request.POST['Category_Id']
+        Difficulty=request.POST['Difficulty']
+        Intensity=request.POST['Intensity']
+        Status=request.POST['Status']
+        CourseData.Trainer_Id = Trainer_Account.objects.get(Trainer_Account_Id = Trainer_Id)
+        CourseData.Series_Name = Series_Name
+        CourseData.Decsription = Decsription
+        CourseData.Category_Id = Category.objects.get(C_Name = CategoryName)
+        CourseData.Difficulty = Difficulty
+        CourseData.Intensity = Intensity
+        CourseData.Status = Status
+        CourseData.save()
+    
+        Series_Image = request.FILES.get('Series_Image',False)
+        if Series_Image:
+            CourseData.Series_Image = Series_Image
             CourseData.save()
-        
-            Series_Image = request.FILES.get('Series_Image',False)
-            if Series_Image:
-                CourseData.Series_Image = Series_Image
-                CourseData.save()
 
-            
-            messages.success(request,"Update Course Sucessfully")
-            return redirect('/superadmin/series')
-        courseid = request.GET['id']
-        userdata=list()
-        courseData = Course.objects.get(Course_Id = courseid )
-        mydata=(Ser_Course(courseData))
-        userdata.append(mydata.data)
-        return HttpResponse(json.dumps(userdata))
-    except:
+        
+        messages.success(request,"Update Course Sucessfully")
         return redirect('/superadmin/series')
+    courseid = request.GET['id']
+    userdata=list()
+    courseData = Course.objects.get(Course_Id = courseid )
+    mydata=(Ser_Course(courseData))
+    userdata.append(mydata.data)
+    return HttpResponse(json.dumps(userdata))
+    # except:
+        # return redirect('/superadmin/series')
 
     
 
