@@ -61,7 +61,7 @@
                         </div>
                         <form class="kt-form" action="/clientside/becometrainer" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <input placeholder="Username" id="username" name="Username" type="text" required>
+                            <input placeholder="username" id="username" name="Username" type="text" required>
 
                             <input placeholder="First Name" id="f_name" name="U_Fname" type="text" required>
 
@@ -70,7 +70,7 @@
                             <input placeholder="Email Address" id="email_link" name="U_Email" type="email" required>
 
                             <input placeholder="Contact No" id="contact_no" name="U_ContactNo" type="text" required>
-                            <textarea rows="2" name="U_Desc" placeholder="Desciption" required></textarea>
+                            <textarea rows="2" name="U_Desc" placeholder="Description" required></textarea>
                             <input type="file" name="U_Image" style="padding: 1rem; padding-left: 0px;">
 
                             <div class="selection-box"><select name="Gender">
@@ -85,7 +85,7 @@
 
 
                             <label><input type="checkbox" name="termscheckbox" required=""
-                                    style="height: 18px;width: 22px;"> I agreed with terms and conditions and privcy
+                                    style="height: 18px;width: 22px;"> I agreed with terms and conditions and privacy
                                 policy.</label>
                             <div class="text-center">
                                 <input type="hidden" value="" name="referred_by" placeholder="Referral ID">
