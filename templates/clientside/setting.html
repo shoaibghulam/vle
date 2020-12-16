@@ -5,6 +5,7 @@
     border: 1px solid;
     padding: 10px;
      }
+
  </style>
 <body>
     <!-- Header Area -->
@@ -13,13 +14,13 @@
     <!-- /Preloader -->
     <!-- /Header Area -->
     <!-- Custom Page Header -->
-    <section class="custom-header h-75 fill bg-grey">
+    <!-- <section class="custom-header h-75 fill bg-grey">
         <div class="header-inner" class="home-static" style="background:url(/static/assets/user.jfif) no-repeat;">
             <div class="header-table">
                 <span class="display-2 text-dark"><b>{{data.U_Fname}} {{data.U_Lname}}</b></span>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- /Custom Page Header -->
 
     <div class="page-wrapper">
@@ -28,9 +29,9 @@
 
             <div id="exTab1" class="setting-tab">
                 <ul class="nav nav-pills">
-                    <li class="active">
+                    <!-- <li class="active">
                         <a href="#edit" data-toggle="tab">Edit Profile</a>
-                    </li>
+                    </li> -->
                     <!-- <li><a href="#account" data-toggle="tab">Account Setting</a> -->
                     </li>
 
@@ -42,8 +43,8 @@
                 </ul>
                 <div class="tab-content setting clearfix">
                     <div class="tab-pane active" id="edit">
-                        <form action="/clientside/setting" method="POST" enctype="multipart/form-data" class="custom_form">
-
+                        <form action="/clientside/setting" method="POST" enctype="multipart/form-data" class="custom_form" style="padding: 10%;">
+                                 <h2 style="text-align: center;margin-bottom: 12%;">Edit Profile</h2>
                             {% csrf_token %}
 
                             <input placeholder="Username" id="username" name="username" type="text" value="{{data.Username}}">
