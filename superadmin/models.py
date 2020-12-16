@@ -181,11 +181,12 @@ class Course(models.Model):
         return self.Series_Name
 
 class Ser_Course(serializers.ModelSerializer):
+    trianer_id=serializers.ReadOnlyField(source="Trainer_Id.Trainer_Account_Id")
     trianer_name=serializers.ReadOnlyField(source="Trainer_Id.U_Fname")
     category_name=serializers.ReadOnlyField(source="Category_Id.C_Name")
     class Meta:
         model = Course
-        fields = ('trianer_name','Series_Image','Series_Name','Decsription','category_name','Difficulty','Intensity','Status','Subject','Message')
+        fields = ('trianer_name','Series_Image','Series_Name','Decsription','category_name','Difficulty','Intensity','Status','Subject','Message','trianer_id')
 
 
 

@@ -387,16 +387,16 @@
                                 <label class="col-xl-4 col-lg-4 col-form-label">Upload Thumbnail</label>
                                 <div class="col-lg-8 col-xl-8">
                                     <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar_1">
-                                        <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg)"></div>
+                                        <div class="kt-avatar__holder" id="updatethumb"></div>
                                         <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Upload Logo">
                                             <i class="fa fa-pen"></i>
-                                            <input type="file" name="Thumbnail" id="Thumbnail" accept=".png, .jpg, .jpeg" onchange="show(this)"> 
+                                            <input type="file" name="Thumbnail" accept=".png, .jpg, .jpeg" title="Select a image" onchange="show(this)" required> 
                                         </label>
                                         <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
                                             <i class="fa fa-times"></i>
                                         </span>
                                     </div>
-                                    <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                                    <p id="imgerror" class="form-text text-muted "  >Allowed file types: png, jpg, jpeg.</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -486,7 +486,7 @@
             success: function(data) {
 
                 var datas = eval(data);
-
+                alert(datas[0].trianer_name)
                 $('#Trainer_Id').val(datas[0].trianer_name);
                 $('#Series_Name').val(datas[0].series_name);
                 $('#Category_Id').val(datas[0].category_name);
@@ -496,6 +496,8 @@
                 $('#desc').val(datas[0].Decsription);
                 $('#created_at').val(datas[0].created_at);
                 $('#subjid').val(id);
+                $('#updatethumb').css('background-image', 'url(' + datas[0].Thumbnail+ ')');
+              
 
 
 

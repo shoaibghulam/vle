@@ -560,12 +560,13 @@
 
             },
             success: function(data) {
-
-
-
+                 //alert(data)
+                console.log(data)
+               // datas[0].trianer_name
                   //console.log(data);
                 var datas = eval(data);
-                $('#Trainer_Id').val(datas[0].trianer_name);
+              
+                $('#Trainer_Id').val(datas[0].trianer_id);
                      
                 $('#CategoryNAME').val(datas[0].category_name);
                 $('#Series_Name').val(datas[0].Series_Name);
@@ -575,6 +576,7 @@
                 $('#Status').val(datas[0].Status);
                 $('#courseid').val(id);
                 $('.kt-avatar__holder').css('background-image', 'url(' + datas[0].Series_Image+ ')');
+               
                
 
 
