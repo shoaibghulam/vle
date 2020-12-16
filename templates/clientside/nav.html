@@ -129,15 +129,15 @@
                         </ul>
                         </li> --> <li class="user">
                         <a href="/clientside/singlevideo">Subject Videos <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                        <ul style="width:100%;">
+                        <ul style="width:60%;">
                             {% for s in singlevideo|slice:"0:4" %}
                            <li class="col-md-3">
                               <div class="single-member">
                                 
                                  <div class="featured-video position-relative">
                                     <a href="/clientside/showsinglevideo/{{s.Single_Video_id}}" class="p-0">
-                                       <div class="portfolio-content">
-                                          <img class="img-responsive" src="{{s.Thumbnail.url}}" alt="">
+                                       <div class="portfolio-content" >
+                                          <img class="img-responsive" src="{{s.Thumbnail.url}}" alt="" > 
                                           <span class="featured-video-play"><i class="fa fa-play"></i></span>
                                        </div>
                                     </a>
