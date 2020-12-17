@@ -134,7 +134,8 @@
 
 
 
-                                        <select class="form-control" name="Trainer_Id">
+                                        <select class="form-control" name="Trainer_Id" required="required">
+                                            <option value="">Select Trainer</option>
                                             {% for t in trainer %}
                                             <option value="{{t.Trainer_Account_Id}}">{{t.U_Fname}} {{t.U_Lname}}</option>
                                             
@@ -148,7 +149,8 @@
 
 
 
-                                        <select class="form-control" name="Course_Id">
+                                        <select class="form-control" name="Course_Id" required="required">
+                                            <option value="">Select Course</option>
                                             {% for t in course %}
                                             <option value="{{t.Course_Id}}">{{t.Series_Name}}</option>
                                             
@@ -168,7 +170,8 @@
 
 
 
-                                        <select class="form-control" name="Category_Id">
+                                        <select class="form-control" name="Category_Id" required="required">
+                                            <option value="">Select Category</option>
                                             {% for c in category %}
                                             <option value="{{c.Category_Id}}">{{c.C_Name}}</option>
                                             {% endfor %}
@@ -178,8 +181,8 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Select Difficulty:</label>
                                     <div class="col-lg-7">
-                                        <select class="form-control" name="Difficulty">
-                                            
+                                        <select class="form-control" name="Difficulty" required="required">
+                                            <option value="">Select Difficulty</option>
                                             
                                                 <option value="beginner">Beginner</option>
                                                 <option value="moderate">Moderate</option>
@@ -193,8 +196,8 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label">Select Intensity:</label>
                                     <div class="col-lg-7">
-                                        <select class="form-control" name="Intensity">
-                                            
+                                        <select class="form-control" name="Intensity" required="required">
+                                            <option value="">Select Intensity</option>
                                             <option value="level1">Level_1</option>
                                             <option value="level2">Level_2</option>
                                             <option value="level3">Level_3</option>
@@ -486,7 +489,7 @@
             success: function(data) {
 
                 var datas = eval(data);
-                alert(datas[0].trianer_name)
+             
                 $('#Trainer_Id').val(datas[0].trianer_name);
                 $('#Series_Name').val(datas[0].series_name);
                 $('#Category_Id').val(datas[0].category_name);

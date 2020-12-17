@@ -163,7 +163,7 @@
                     <!--begin::Portlet-->
                     <div class="kt-portlet">
                         <!--begin::Form-->
-                        <form enctype="multipart/form-data" class="kt-form" method="POST" action="/superadmin/studentadd">
+                        <form enctype="multipart/form-data" class="kt-form" id="addstudent" method="POST" action="/superadmin/studentadd">
                             {% csrf_token %}
 
                             <div class="kt-portlet__body">
@@ -175,23 +175,23 @@
                                             <div class="col-lg-8 col-xl-8">
 
                                                 <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar_1">
-                                                    <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg); width:100px; "></div>
+                                                    <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg);background-size:cover; width:100px; "></div>
                                                     <label class=" kt-avatar__upload " data-toggle="kt-tooltip " title=" " data-original-title="Upload Logo ">
 														<i class="fa fa-pen"></i>
-														<input type="file" name="image" class="form-control" accept="image/*" required>
+														<input type="file" name="image" class="form-control" accept="image/*" onchange="show(this)" required>
 													</label>
                                                     <span class="kt-avatar__cancel " data-toggle="kt-tooltip " title=" " data-original-title="Cancel avatar ">
 														<i class="fa fa-times "></i>
 													</span>
                                                 </div>
-                                                <span class="form-text text-muted ">Allowed file types: png, jpg, jpeg.</span>
+                                                <div id="img-error"></div>
                                             </div>
                                         </div>
 
                                         <div class="form-group row ">
                                             <label class="col-lg-4 col-form-label ">First Name:</label>
                                             <div class="col-lg-8 ">
-                                                <input required type="text " class="form-control " placeholder="Enter First Name " name="fname">
+                                                <input required type="text " class="form-control " placeholder="Enter First Name " name="fname" data-parsley-trigger="keyup"                 data-parsley-pattern="^[a-zA-Z\s]+$">
                                             </div>
                                         </div>
 
@@ -199,7 +199,7 @@
                                         <div class="form-group row ">
                                             <label class="col-lg-4 col-form-label ">Last Name:</label>
                                             <div class="col-lg-8 ">
-                                                <input required type="text " class="form-control " placeholder="Enter Last Name " name="lname">
+                                                <input required type="text " class="form-control " placeholder="Enter Last Name " name="lname" data-parsley-trigger="keyup"                 data-parsley-pattern="^[a-zA-Z\s]+$" required>
                                             </div>
                                         </div>
 
@@ -213,13 +213,13 @@
                                         <div class="form-group row ">
                                             <label class="col-lg-4 col-form-label ">Student Email:</label>
                                             <div class="col-lg-8 ">
-                                                <input required type="email " class="form-control " placeholder="Enter User Email " name="email">
+                                                <input required type="email " class="form-control " placeholder="Enter User Email " name="email"  data-parsley-trigger="keyup" data-parsley-type="email" required>
                                             </div>
                                         </div>
                                         <div class="form-group row ">
                                             <label class="col-lg-4 col-form-label ">Student Contact:</label>
                                             <div class="col-lg-8 ">
-                                                <input required type="text " class="form-control " placeholder="Enter User Contact " name="phone">
+                                                <input required type="text " class="form-control " placeholder="Enter User Contact " name="phone" data-parsley-length="[6, 14]" data-parsley-trigger="keyup" data-parsley-type="digits" required>
                                             </div>
                                         </div>
 
@@ -319,7 +319,7 @@
                     <!--begin::Portlet-->
                     <div class="kt-portlet">
                         <!--begin::Form-->
-                        <form enctype="multipart/form-data" class="kt-form" method="POST" action="/superadmin/showStudentDetail">
+                        <form enctype="multipart/form-data" class="kt-form" id="updatestudent" method="POST" action="/superadmin/showStudentDetail">
                             {% csrf_token %}
 
                             <div class="kt-portlet__body">
@@ -338,7 +338,7 @@
 														<i class="fa fa-pen "></i>
 
 
-														<input type="file" name="image" id="img"class="form-control" accept="image/*">
+														<input type="file" name="image" id="img"class="form-control" accept="image/*" onchange="show(this)">
 
 
 													</label>
@@ -346,14 +346,14 @@
 														<i class="fa fa-times "></i>
 													</span>
                                                 </div>
-                                                <span class="form-text text-muted ">Allowed file types: png, jpg, jpeg.</span>
+                                                <div id="img-error"></div>
                                             </div>
                                         </div>
 
                                         <div class="form-group row ">
                                             <label class="col-lg-4 col-form-label ">First Name:</label>
                                             <div class="col-lg-8 ">
-                                                <input required type="text " class="form-control " placeholder="Enter First Name " name="fname" id="fname">
+                                                <input required type="text " class="form-control " placeholder="Enter First Name " name="fname" id="fname" data-parsley-trigger="keyup"                 data-parsley-pattern="^[a-zA-Z\s]+$" required>
 
 
                                                 <input type="hidden" name="studentId" id="studentId">
@@ -364,34 +364,34 @@
                                         <div class="form-group row ">
                                             <label class="col-lg-4 col-form-label ">Last Name:</label>
                                             <div class="col-lg-8 ">
-                                                <input required type="text " class="form-control " placeholder="Enter Last Name " name="lname" id="lname">
+                                                <input required type="text " class="form-control " placeholder="Enter Last Name " name="lname" id="lname" data-parsley-trigger="keyup"                 data-parsley-pattern="^[a-zA-Z\s]+$" required>
                                             </div>
                                         </div>
 
 
                                         <div class="form-group row ">
-                                            <label class="col-lg-4 col-form-label ">Student Name:</label>
+                                            <label class="col-lg-4 col-form-label ">Student Username:</label>
                                             <div class="col-lg-8 ">
-                                                <input required type="text " class="form-control " placeholder="Enter User Name " name="username" id="username">
+                                                <input required type="text " class="form-control " placeholder="Enter User Name " name="username" id="username" required>
                                             </div>
                                         </div>
                                         <div class="form-group row ">
                                             <label class="col-lg-4 col-form-label ">Student Email:</label>
                                             <div class="col-lg-8 ">
-                                                <input required type="email " class="form-control " placeholder="Enter User Email " name="email" id="email">
+                                                <input required type="email " class="form-control " placeholder="Enter User Email " name="email" id="email" data-parsley-trigger="keyup" data-parsley-type="email" required>
                                             </div>
                                         </div>
                                         <div class="form-group row ">
                                             <label class="col-lg-4 col-form-label ">Student Contact:</label>
                                             <div class="col-lg-8 ">
-                                                <input id="phone" required type="text " class="form-control " placeholder="Enter User Contact " name="phone">
+                                                <input id="phone" required type="text " class="form-control " placeholder="Enter User Contact " name="phone" data-parsley-length="[6, 14]" data-parsley-trigger="keyup" data-parsley-type="digits" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group row ">
                                             <label class="col-lg-4 col-form-label ">Gender:</label>
                                             <div class="col-lg-8 ">
-                                                <select name="gender" class="form-control" id="gender">
+                                                <select name="gender" class="form-control" id="gender" required>
                                                     <option value="male">Male</option>
                                                     <option value="female">Female</option>
                                                    
@@ -466,11 +466,44 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
+<script src="{% static '' %}validator/js/parsley.min.js"></script>
 <script>
+    $(document).ready(function(){
+        $('#addstudent').parsley();
+        $('#updatestudent').parsley();
+    })
+
     var modal = document.getElementById('check12');
     var backdrop = document.getElementsByClassName('modal-backdrop')
+  function show(input) {
+        debugger;
+        var validExtensions = ['jpg','png','jpeg']; //array of valid extensions
+        var fileName = input.files[0].name;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+        if ($.inArray(fileNameExt, validExtensions) == -1) {
+            input.type = ''
+            input.type = 'file'
+            $('#user_img').attr('src',"");
+            $('#img-error').show()
+              $('#img-error').html("<span style='color:red'>Allowed File type jpg , png , jpeg </span>")
 
+            
+            
+        }
+        else
+        {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+                $('#img-error').hide()
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+        }
+    }
     function btnclick() {
         console.log('functionworking', backdrop);
         modal.style.display = 'none';

@@ -7,6 +7,7 @@
     height: 200px;
     object-fit: cover;
 }
+
 </style>
 <body>
     <!-- Header Area -->
@@ -460,18 +461,17 @@
                     <form class="form-horizontal" action="/clientside/filterseries" method="POST">
                         {% csrf_token %}
                         <div class="form-group row">
-
-                            <div class="col-md-5">
+                             <div class="col-md-5"></div>
+                            <div class="col-md-5" >
                                 <input type="text" class="form-control ui-autocomplete-input" placeholder="Enter Course Name Here" name="coursename" id="txtsearch1">
-
                             </div>
-
-
-
-
                             <div class="col-md-2">
-                                <input type="Submit" class="btn btn-primary" value="Search" name="">
+                                <input type="Submit" class="btn btn-primary" value="Search" name="" style="height: 1%; border-color: #0fb5bd;background: #0fb5bd;">
+
                             </div>
+
+
+
                         </div>
                     </form>
 
@@ -482,11 +482,11 @@
             <!-- end search box -->
             <div class="finder-page">
 
-                <div class="row recruiter">
+                <div class="row recruiter cutom-row">
                     {% for s in course %}
 
 
-                    <div class="recruiter-info animal col-md-4 col-sm-6 m-auto  " data-custom-type="TX SC" data-category="vehicle2">
+                    <div class="recruiter-info animal col-md-3 col-sm-6 m-auto  " data-custom-type="TX SC" data-category="vehicle2">
 
 
                         <div class="featured-video position-relative">
@@ -529,14 +529,14 @@
                                     </ul>
                                 </div>
                             </div>
-                            <p class="fs-1"><b>{{s.Trainer_Id.U_Fname}}</b></p>
-                            <p class="fs-1"><b>{{s.Trainer_Id.U_Lname}}</b></p>
+                            <p class="fs-1"><b>{{s.Trainer_Id.U_Fname}}</b> &nbsp;<b>{{s.Trainer_Id.U_Lname}}</b></p>
+                            <!-- <p class="fs-1"></p> -->
 
                             <div class="pt-4 text-left">
-                                <p>{{s.Decsription | slice:":300"}}
+                                <p>{{s.Decsription | slice:":10"}}
                                     <span id="dots">...</span>
                                     <span id="more">
-                                                {{s.Decsription | slice:"300:"}}
+                                                {{s.Decsription | slice:"10:"}}
     
     
                                             </span>
@@ -545,6 +545,7 @@
                                     </a>
                                 </p>
                             </div>
+                            
                         </div>
 
                     </div>

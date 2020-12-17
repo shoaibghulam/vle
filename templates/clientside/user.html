@@ -4,6 +4,18 @@
     position: relative;
     left:30px;
 }
+.home-static {
+    color: #fff;
+    height: 350px ;
+}
+.user-name-bio-container {
+    box-shadow: 1px 6px 3px #888888;
+    padding: 15px;
+    background: #f4f4f4;
+    border: 1px solid gray;
+    position: relative;
+    left: 30px;
+}
 </style>
 
 <body>
@@ -80,7 +92,7 @@
                                             <div class="col-md-3 ">
                                                 Name:
                                             </div>
-                                            <div class="col-md-4 custom-position">
+                                            <div class="col-md-9 custom-position">
                                                 {{data.U_Fname}} {{data.U_Lname}}
                                             </div>
                                         </div>
@@ -88,22 +100,20 @@
                                             <div class="col-md-3 ">
                                                 Email:
                                             </div>
-                                            <div class="col-md-4 custom-position">
+                                            <div class="col-md-9 custom-position">
                                                 {{data.U_Email}} </div>
                                         </div>
                                         <div class="row mt-3 ">
                                             <div class="col-md-3 ">
                                                 Contact:
                                             </div>
-                                            <div class="col-md-4 custom-position">
+                                            <div class="col-md-9 custom-position">
                                                 {{data.U_ContactNo}}
                                             </div>
-                                        </div>
-                                        <div class="row mt-3 ">
-                                            <div class="col-md-3 ">
+                                            <div class="col-md-3 mt-4">
                                                 Subscription:
                                             </div>
-                                            <div class="col-md-6 custom-position">
+                                            <div class="col-md-9 custom-position mt-4">
                                                 {{data.Package_Id.Package_subscription}}
                                             </div>
                                         </div>

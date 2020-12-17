@@ -456,14 +456,14 @@
 
                     {% for data in relatedcategory %}
 
-                    <div class="recruiter-info animal col-md-4 col-sm-6 m-auto  " data-custom-type="TX SC" data-category="vehicle2">
+                    <div class="recruiter-info animal col-md-3 col-sm-6 m-auto  " data-custom-type="TX SC" data-category="vehicle2">
 
                         <div class="featured-video position-relative">
                             <div class="product-badges">
                                 <div class="category-card-formatter">
-                                    <div class="product-category ng-scope" style="width: auto;">
+                                    <!-- <div class="product-category ng-scope" style="width: auto;">
                                         <span class="category-label ng-binding">{{data.Series_Name}}</span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <a href="/clientside/showcoursevideo/{{data.Course_Id}}">
@@ -498,19 +498,20 @@
                                     </ul>
                                 </div>
                             </div>
-                            <p class="fs-1"><b>{{data.Series_Name}}</b></p>
-                            <p class="fs-1"><b>{{data.Trainer_Id}}</b></p>
+                            <p class="fs-1"><b>{{data.Series_Name}}</b>&nbsp;<b>{{data.Trainer_Id}}</b></p>
+                            <!-- <p class="fs-1"><b>{{data.Trainer_Id}}</b></p> -->
 
                             <div class="pt-4 text-left">
-                                <p>{{data.Decsription | slice:":300"}}
+                                <p>{{data.Decsription | slice:":30"}}
                                     <span id="dots">...</span>
                                     <span id="more">
-                                            {{data.Decsription | slice:"300:"}}
+                                            {{data.Decsription | slice:"30:"}}
 
 
                                         </span>
+                                        <button class="btn btn-link" onclick="myFunction()" id="myBtn">Read more</button>
                                 </p>
-                                <button class="btn btn-link" onclick="myFunction()" id="myBtn">Read more</button>
+                               
                             </div>
                         </div>
 

@@ -168,13 +168,13 @@
                                                     <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg)"></div>
                                                     <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Upload Logo">
 														<i class="fa fa-pen"></i>
-														<input type="file" name="Series_Image" accept=".png, .jpg, .jpeg" required>
+														<input type="file" name="Series_Image" accept=".png, .jpg, .jpeg" onchange="show(this)" required >
 													</label>
                                                     <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
 														<i class="fa fa-times"></i>
 													</span>
                                                 </div>
-                                                <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                                                <div class="img-error"></div>
                                             </div>
                                         </div>
 
@@ -315,13 +315,13 @@
                                                     <div class="kt-avatar__holder" style="background-image: url(/static/assets/media/users/100_1.jpg)"></div>
                                                     <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Upload Logo">
 														<i class="fa fa-pen"></i>
-														<input type="file" name="Series_Image" id="Series_Image" accept=".png, .jpg, .jpeg">
+														<input type="file" name="Series_Image" id="Series_Image" accept=".png, .jpg, .jpeg" onchange="show(this)">
 													</label>
                                                     <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancel avatar">
 														<i class="fa fa-times"></i>
 													</span>
                                                 </div>
-                                                <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
+                                                <div class="img-error"></div>
                                             </div>
                                         </div>
 
@@ -333,7 +333,7 @@
 
                                                 <select class="form-control" name="Trainer_Id" id="Trainer_Id">
                                                     {% for t in trainer %}
-                                                    <option value="{{t.Trainer_Account_Id}}">{{t.U_Fname}}{{t.U_Lname}} </option>
+                                                    <option value="{{t.Trainer_Account_Id}}">{{t.U_Fname}} {{t.U_Lname}} </option>
                                                     
                                                     {% endfor %}
                                                 </select>
@@ -523,6 +523,34 @@
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+    function show(input) {
+        debugger;
+        var validExtensions = ['jpg','png','jpeg']; //array of valid extensions
+        var fileName = input.files[0].name;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+        if ($.inArray(fileNameExt, validExtensions) == -1) {
+            input.type = ''
+            input.type = 'file'
+            $('#user_img').attr('src',"");
+            $('.img-error').show()
+              $('#img-error').html("<span style='color:red'>Allowed File type jpg , png , jpeg </span>")
+
+            
+            
+        }
+        else
+        {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
+                $('.img-error').hide()
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+        }
+    }
+
 
     function showmessage(id) {
         $.ajax({

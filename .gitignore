@@ -1,2 +1,6 @@
 upload
+<<<<<<< HEAD
 virtual_learning_system\settings.py
+=======
+db.sqlite3
+>>>>>>> d942406ece25a79693d32e312769b8b941d6331d
