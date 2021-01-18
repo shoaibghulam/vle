@@ -19,10 +19,15 @@ stripe.api_key='sk_test_SD1VLYLcME6RYimXA3xxNKXW00eXfNnzuC'
 # Create your views here.
 def index(request):
     try:
+        CategoryName = Category.objects.all()
+        subjectCourse = Subject_Video.objects.all()
+        singlevideo=Single_Video.objects.all()
+        Teacher=Trainer_Account.objects.all()
+        course=Course.objects.all()
         recentcourse=Course.objects.all().order_by('-Course_Id')
         recentvideo=Single_Video.objects.all().order_by('-Single_Video_id')
         recentteacher=Trainer_Account.objects.all().order_by('-Trainer_Account_Id')
-        return render(request,'clientside/index.html',{'recentcourse':recentcourse,'recentvideo':recentvideo,'recentteacher':recentteacher})
+        return render(request,'clientside/index.html',{'recentcourse':recentcourse,'recentvideo':recentvideo,'recentteacher':recentteacher,'category':CategoryName,'subject':subjectCourse,'singlevideo':singlevideo,'Teacher':Teacher,'course':course,'recentcourse':recentcourse,})
     except:
         return redirect('/clientside/')
 
@@ -185,6 +190,7 @@ def signup(request):
                 return redirect('/clientside/signup')
             userData = User_Account(U_Fname = fname,  U_Lname = lname,Username = username,U_Email = email, U_ContactNo = phone,Gender = gender,SPassword = password,DOB = dbirth,U_Desc = description,U_Image = images)
             userData.save()
+            messages.success(request,"Signup Successfully")
             return redirect('/clientside/signin')
             
 

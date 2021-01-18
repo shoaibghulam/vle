@@ -64,14 +64,15 @@
                                     <option value="female">female</option>
                                 </select>
                             </div>
-                            <input placeholder="Date Of Birth" name="dob" type="date" style="margin-bottom: 9px !important;" required="">
-                            <input placeholder="Referral Code Here (Optinal)" name="ref_code" type="text">
+                            <input placeholder="Date Of Birth" name="dob" type="text" onfocus="(this.type='date')" id="date" style="margin-bottom: 9px !important;" required="">
+                            <input placeholder="Referral Code Here (Optional)" name="ref_code" type="text">
 
 
                             <input placeholder="Password" name="password" type="password" required="">
 
 
                             <textarea rows="2" name="U_Desc" placeholder="Description" required></textarea>
+                            
                             <input type="file" name="image" style="padding: 1rem; padding-left: 0px;" required>
 
                             <div class="text-center">
