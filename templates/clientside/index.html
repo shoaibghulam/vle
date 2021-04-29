@@ -51,9 +51,12 @@
 <!-- /Header Area -->
 <div class="single-slider video-overlay" style="background:#666;">
     <div id="ytvideo" class="loaded">
-        <div id="ytplayer-container1594220656864" class="ytplayer-container background"> <iframe id="YTPlayer-ID-1594220656864" class="ytplayer-player" style="width:100%; height:100vh; left: 0px; top:0px;" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player"
-                width="100%" height="100%" src="https://www.youtube.com/embed/Bp4BG4Me7TU?iv_load_policy=3&amp;modestbranding=0&amp;autoplay=1&amp;controls=0&amp;showinfo=0&amp;wmode=transparent&amp;branding=0&amp;autohide=0&amp;rel=0&amp;mute=true&amp;origin=http%3A%2F%2Flocalhost&amp;enablejsapi=1&amp;widgetid=1"></iframe>
-        </div>
+        <!-- <div id="ytplayer-container1594220656864" class="ytplayer-container background"> <iframe id="YTPlayer-ID-1594220656864" class="ytplayer-player" style="width:100%; height:100vh; left: 0px; top:0px;" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player"
+                width="100%" height="100%" src="https://www.youtube.com/embed/ZPs3URGs0KQ"></iframe>
+        </div> -->
+
+        <div id="ytplayer-container1594220656864" class="ytplayer-container background"><iframe style="width:100%; height:100vh; left: 0px; top:0px;" width="560" height="315" src="https://www.youtube.com/embed/ZPs3URGs0KQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
         <div id="ytplayer-shield" class="ytplayer-shield"></div>
     </div>
     <!-- <div class="slider-box">
@@ -70,7 +73,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8 text-center">
-                    <h1 class="textHeaderInner">EDUCATORS lEARNING PLATFORM</h1>
+                    <h1 class="textHeaderInner">EDUCATORS LEARNING PLATFORM</h1>
                     <div class="col-md-12 mt-3 text-center  pt-average pb-average text-white">
                         <h3 class="text-white text-bot">$11.99 PER MONTH or $115 PER YEAR</h3>
                     </div>
@@ -85,7 +88,7 @@
             <div class="section-title">
                 <h4>DIFFERENT COURSES PROGRAMS WE OFFER</h4>
             </div>
-        <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+        <!-- <marquee onMouseOver="this.stop()" onMouseOut="this.start()"> -->
             <div class="home-items owl-carousel">
                 {% for r in recentcourse %}
 
@@ -109,7 +112,7 @@
 
                 {% endfor %}
             </div>
-        </marquee>
+        <!-- </marquee> -->
         </section>
         <!-- /Team Area -->
      <!--    <section class="instagram-area section-padding">
@@ -163,7 +166,7 @@
             <div class="section-title">
                 <h4>DIFFERENT SINGLE COURSES VIDEOS WE OFFER</h4>
             </div>
-        <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+        <!-- <marquee onMouseOver="this.stop()" onMouseOut="this.start()"> -->
             <div class="home-items owl-carousel">
                {% for r in recentvideo %}
 
@@ -187,7 +190,7 @@
 
                 {% endfor %}
             </div>
-        </marquee>
+        <!-- </marquee> -->
         </section>
 
         
@@ -237,14 +240,14 @@
             <div class="section-title">
                 <h4>Get to Know Our Instructors</h4>
             </div>
-        <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+        <!-- <marquee onMouseOver="this.stop()" onMouseOut="this.start()"> -->
             <div class="home-items owl-carousel">
                 {% for r in recentteacher %}
 
                 <div class="single-insta">
                     <div class="featured-video position-relative">
                         <a href="/clientside/showteacherprofile/{{r.Trainer_Account_Id}}">
-                            <img class="img-responsive" src="{{r.U_Image.url}}" alt="">
+                            <img class="img-responsive" src="{{r.U_Image.url}}" width="300px" height="168px" alt="">
                         </a>
                         <span class="featured-video-play-add">
 
@@ -262,7 +265,7 @@
 
                 {% endfor %}
             </div>
-        </marquee>
+        <!-- </marquee> -->
         </section>
          <!-- <section class="instagram-area section-padding">
             <div class="row">
