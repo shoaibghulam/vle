@@ -79,17 +79,32 @@ WSGI_APPLICATION = 'virtual_learning_system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
+#Docker DB Configuration #
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'db',
+#         'PORT': 5432,
+#     }
+# }
+
+#Docker DB Configuration #
+
+#local Db Configuration
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'NAME': 'jim2',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'shoaib',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '5433'
+        
     }
 }
+
+#local Db Configuration
 
 
 # Password validation
