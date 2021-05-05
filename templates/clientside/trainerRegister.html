@@ -61,7 +61,7 @@
                         </div>
                         <form class="kt-form" action="/clientside/becometrainer" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <input placeholder="username" id="username" name="Username" type="text" required>
+                            <input placeholder="Username" id="username" name="Username" type="text" required>
 
                             <input placeholder="First Name" id="f_name" name="U_Fname" type="text" required>
 
@@ -69,13 +69,13 @@
 
                             <input placeholder="Email Address" id="email_link" name="U_Email" type="email" required>
 
-                            <input placeholder="Contact No" id="contact_no" name="U_ContactNo" type="text" required>
+                            <input placeholder="Contactno" id="contact_no" name="U_ContactNo" type="text" required>
                             <textarea rows="2" name="U_Desc" placeholder="Description" required></textarea>
                             <input type="file" name="U_Image" style="padding: 1rem; padding-left: 0px;">
 
                             <div class="selection-box"><select name="Gender">
-                                    <option value="female">male</option>
-                                    <option value="female">female</option>
+                                    <option value="female">Male</option>
+                                    <option value="female">Female</option>
                                 </select>
                             </div>
 

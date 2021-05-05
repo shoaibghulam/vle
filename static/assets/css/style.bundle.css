@@ -35482,7 +35482,7 @@ body {
     align-items: stretch;
     margin: 0; }
     .kt-header__topbar .kt-header__topbar-item .kt-header__topbar-wrapper {
-      cursor: pointer;
+      /* cursor: pointer; */
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -35534,7 +35534,7 @@ body {
       -ms-flex-pack: center;
       justify-content: center;
       height: 44px;
-      cursor: pointer;
+      /* cursor: pointer; */
       border-radius: 4px; }
       .kt-header__topbar .kt-header__topbar-item.kt-header__topbar-item--user .kt-header__topbar-user .kt-header__topbar-welcome {
         display: -webkit-box;
